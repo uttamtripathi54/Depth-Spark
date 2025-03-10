@@ -1,0 +1,786 @@
+/* style.css - FULL LENGTH - LIGHT THEME - WIDER FEATURES SECTION - LARGER FEATURE TEXT - LARGER STEP/ABOUT/FAQ TEXT - INVERTED ABOUT SECTION */
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #555;
+    background: #f8f9fa;
+    background-attachment: fixed;
+    padding-top: 60px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to bottom, #e0f7fa, #f0f9ff);
+    border-bottom: 1px solid #cddde3;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: #00bcd4;
+    font-size: 2.3em;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.05em;
+    margin-right: auto;
+}
+
+nav {
+    flex: 1;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: inline-block;
+}
+
+nav ul li {
+    margin: 0 18px;
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #00bcd4;
+    text-decoration: underline;
+}
+
+.header-auth {
+    margin-left: auto;
+}
+
+.header-auth a {
+    display: inline-block;
+    margin-left: 15px;
+    padding: 10px 18px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #00bcd4;
+    border-radius: 7px;
+    transition: background-color 0.3s ease;
+    font-size: 1.05em;
+}
+
+.header-auth a:hover {
+    background-color: #00acc1;
+}
+
+/* Hero Section */
+.hero-section {
+    width: 100%;
+    height: 100vh;
+    padding: 70px 0;
+    background: linear-gradient(to right, #f0f9ff, #ffffff);
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.hero-section .container { /* Corrected selector - removed duplicate class name */
+    display: flex;
+    align-items: center;
+    max-width: 1600px;
+}
+
+.hero-text {
+    flex: 1.5;
+    padding-right: 30px;
+    padding-left: 40px;
+    max-width: 70%;
+}
+
+.hero-text h1 {
+    font-size: 4.2em;
+    color: #333;
+    margin-bottom: 35px;
+    letter-spacing: -1.4px;
+    line-height: 1.1;
+}
+
+.hero-text p {
+    font-size: 1.7em;
+    color: #666;
+    margin-bottom: 60px;
+    line-height: 2.0;
+    font-weight: 400;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 30%;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.hero-image img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: linear-gradient(to right, #7cb342, #558b2f);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-size: 1.4em;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.button:hover {
+    background: linear-gradient(to right, #558b2f, #407024);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+/* Features Section - LARGER TEXT */
+.features {
+    width: 100%;
+    padding: 70px 0;
+    background-color: #f9f9f9;
+    margin-top: 40px;
+}
+
+.features .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1600px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.features h2 {
+    font-size: 2.8em;
+    color: #333;
+    margin-bottom: 45px;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.feature:first-child {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.feature:hover,
+.features .feature:not(:first-child):hover,
+.features .feature:first-child:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.feature h3 {
+    font-size: 1.95em; /* Increased feature title font-size by about 15% */
+    color: #444;
+    margin-bottom: 18px; /* Slightly adjusted margin for larger text */
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.feature p {
+    font-size: 1.35em; /* Increased feature description font-size by about 10% */
+    color: #777;
+    line-height: 1.8;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+/* How It Works Section Styles - NO STEP ICONS - LARGER TEXT */
+.how-it-works {
+    width: 100%;
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #f0f0f0, #ffffff);
+}
+
+.how-it-works .container {
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 3.0em;
+    color: #333;
+    margin-bottom: 60px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 20px;
+    letter-spacing: -0.6px;
+    text-align: center;
+    background: linear-gradient(to right, #7cb342, #558b2f);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.how-it-works h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(to right, #7cb342, #558b2f);
+    border-radius: 2px;
+}
+
+.step {
+    margin-bottom: 60px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    display: block; /* Reverted to block display - No icons now */
+    align-items: initial; /* Removed align-items for block display */
+}
+
+.step:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+
+.step h3 {
+    font-size: 2.1em; /* Increased Step title font-size */
+    color: #444;
+    margin-bottom: 18px; /* Adjusted margin */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-align: left;
+    margin-top: 0;
+}
+
+.step p {
+    color: #777;
+    font-size: 1.45em; /* Increased Step description font-size */
+    line-height: 2.0; /* Adjusted line-height */
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/* About Section - LARGER TEXT - HERO STYLE INVERTED */
+.about {
+    width: 100%;
+    padding: 80px 0;
+    background-color: #f0f2f5;
+}
+
+.about .container.about-container { /* Container for About Section - Flex Layout */
+    max-width: 1600px; /* Wider container like hero */
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+    display: flex; /* Enable flexbox for side-by-side layout */
+    align-items: center; /* Vertically align items */
+    text-align: left; /* Align text to the left within the text section */
+}
+
+.about-image { /* Style for the image container in About section */
+    flex: 1; /* Take up 1/3 of the space */
+    max-width: 30%; /* Limit image width to 30% of the container */
+    padding-left: 0px; /* No left padding for image */
+    padding-right: 30px; /* Add right padding to separate from text */
+}
+
+.about-image img { /* Style for the image in About section */
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.about-image img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+.about-text { /* Style for the text container in About section */
+    flex: 1.5; /* Take up 2/3 of the space (similar proportion to hero text) */
+    padding-left: 0px; /* No left padding for text, space comes from image's right padding */
+    padding-right: 40px; /* Right padding for text section */
+}
+
+
+.about h2 {
+    font-size: 3.1em; /* Increased About section heading font-size */
+    color: #333;
+    margin-bottom: 35px; /* Adjusted margin */
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 20px;
+    text-align: left; /* Left align heading now */
+    background: linear-gradient(to right, #00a3b3, #008699);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.about h2::after {
+    content: '';
+    position: absolute;
+    left: 0%; /* Align underline to the left now */
+    bottom: 0;
+    transform: translateX(0%); /* No translate needed now */
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(to right, #00a3b3, #008699);
+    border-radius: 2px;
+}
+
+.about p {
+    color: #777;
+    margin-bottom: 25px; /* Adjusted margin */
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.4em; /* Increased About section paragraph font-size */
+    line-height: 2.0; /* Adjusted line-height */
+    font-weight: 400;
+    text-align: left; /* Left align paragraphs */
+}
+
+/* FAQ Section - LARGER TEXT */
+.faq {
+    width: 100%;
+    padding: 70px 0;
+    background: linear-gradient(to bottom, #f8f8f8, #ffffff);
+}
+
+.faq .container {
+    text-align: left;
+}
+
+.faq h2 {
+    font-size: 3.2em; /* Increased FAQ section heading font-size */
+    color: #333;
+    margin-bottom: 55px; /* Adjusted margin */
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 20px;
+    background: linear-gradient(to right, #00a3b3, #008699);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    padding-bottom: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.faq h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(to right, #00a3b3, #008699);
+    border-radius: 2px;
+}
+
+.faq-item {
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    text-align: left;
+}
+
+.faq-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-6px);
+}
+
+.faq-item h3 {
+    font-size: 1.7em; /* Increased FAQ item question font-size */
+    color: #444;
+    margin-bottom: 18px; /* Adjusted margin */
+    font-weight: 600;
+}
+
+.faq-item p {
+    color: #777;
+    font-size: 1.3em; /* Increased FAQ item answer font-size */
+    line-height: 1.8; /* Adjusted line-height */
+    padding-left: 10px;
+    border-left: 3px solid #00bcd4;
+    margin-top: 12px; /* Adjusted margin */
+}
+
+/* CTA Section */
+.cta-section {
+    width: 100%;
+    padding: 60px 0;
+    background: linear-gradient(to right, #00bcd4, #00acc1);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cta-section .container {
+}
+
+.cta-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+}
+
+.cta-section p {
+    font-size: 1.3em;
+    margin-bottom: 35px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(to bottom, #264d4d, #1a3333);
+    color: #ddd;
+    text-align: center;
+    padding: 35px 0;
+    font-size: 1.15em;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    border-top: 1px solid #336666;
+    box-shadow: 0px -3px 7px rgba(0,0,0,0.2);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        text-align: center;
+    }
+
+    nav ul {
+        display: block;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .header-auth {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .header-auth a {
+        margin-left: 0;
+        margin: 5px 0;
+        display: block;
+    }
+
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 50px 0;
+        margin-bottom: 40px;
+    }
+
+    .hero-section .container {
+        flex-direction: column;
+    }
+
+    .hero-text {
+        padding-right: 0;
+        padding-left: 0;
+        margin-bottom: 25px;
+        max-width: 100%;
+    }
+
+    .hero-image {
+        max-width: 80%;
+        margin-top: 20px;
+    }
+
+    .features, .how-it-works, .about, .faq {
+        padding: 40px 0;
+    }
+
+    /* Wider Features Section - Mobile Adjustments - LARGER TEXT ON MOBILE ALSO */
+    .features .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .features h2 {
+        font-size: 2.4em;
+        margin-bottom: 35px;
+    }
+
+    .feature {
+        padding: 20px;
+    }
+
+    .feature h3 {
+        font-size: 1.65em; /* Increased mobile feature title font-size */
+        margin-bottom: 12px;
+    }
+
+    .feature p {
+        font-size: 1.2em; /* Increased mobile feature description font-size */
+    }
+
+
+    .cta-section {
+        padding: 50px 0;
+    }
+
+    .step {
+        max-width: 100%;
+        padding: 25px;
+        display: block;
+        text-align: center;
+    }
+
+    .step h3, .step p {
+        text-align: center;
+    }
+
+
+    .faq-item {
+        max-width: 100%;
+        padding: 25px;
+    }
+
+    .about p {
+        max-width: 100%;
+    }
+
+    .cta-section p {
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8em;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        font-size: 1.4em;
+        margin-bottom: 40px;
+    }
+
+    .cta-section h2 {
+        font-size: 1.9em;
+    }
+
+    .how-it-works h2 {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+
+    .how-it-works h2::after {
+        height: 3px;
+        width: 40px;
+    }
+
+    .step {
+        padding: 25px;
+        margin-bottom: 35px;
+    }
+
+    .step h3 {
+        font-size: 1.6em; /* Increased mobile step title font-size */
+        margin-bottom: 15px;
+    }
+
+    .step p {
+        font-size: 1.3em; /* Increased mobile step description font-size */
+    }
+
+    .faq h2 {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+
+    .faq h2::after {
+        height: 3px;
+        width: 40px;
+    }
+
+    .faq-item {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .faq-item h3 {
+        font-size: 1.5em; /* Increased mobile FAQ item question font-size */
+        margin-bottom: 12px;
+    }
+
+    .faq-item p {
+        font-size: 1.2em; /* Increased mobile FAQ item answer font-size */
+        padding-left: 7px;
+    }
+
+    /* About Section Mobile Adjustments - INVERTED HERO STYLE - MOBILE */
+    .about .container.about-container { /* Mobile adjustments for About container */
+        flex-direction: column; /* Stack image and text on mobile */
+        text-align: center; /* Center text on mobile */
+    }
+
+    .about-image { /* Mobile adjustments for About image */
+        max-width: 80%; /* Wider image on mobile */
+        padding-right: 0; /* Remove right padding on mobile */
+        margin-bottom: 25px; /* Add margin below image */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-text { /* Mobile adjustments for About text */
+        padding-right: 0; /* Remove right padding on mobile */
+    }
+
+    .about h2 { /* Mobile adjustments for About heading */
+        font-size: 2.4em; /* Increased mobile About section heading font-size */
+        margin-bottom: 30px; /* Adjusted margin */
+        text-align: center; /* Center heading on mobile */
+    }
+
+    .about h2::after { /* Mobile adjustments for About heading underline */
+        height: 3px;
+        width: 40px;
+        left: 50%; /* Center underline on mobile */
+        transform: translateX(-50%); /* Center underline on mobile */
+    }
+
+    .about p { /* Mobile adjustments for About paragraph */
+        font-size: 1.2em; /* Increased mobile About section paragraph font-size */
+        margin-bottom: 20px; /* Adjusted margin */
+        line-height: 1.7; /* Adjusted line-height for mobile */
+        text-align: center; /* Center paragraph text on mobile */
+    }
+
+
+    /* Responsive adjustments for Feature card scaling */
+    .features .container {
+        grid-template-columns: 1fr; /* Stack features on mobile */
+    }
+
+    .feature:first-child {
+        transform: scale(1); /* Reset scaling on mobile for first feature card */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Reset shadow on mobile */
+    }
+
+    .feature:hover,
+    .features .feature:not(:first-child):hover,
+    .features .feature:first-child:hover { /* Apply hover effect on mobile as well if desired, or remove */
+        transform: translateY(-4px) scale(1); /* Reduced scale & lift on hover for mobile, or just translateY(-4px) for lift only */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Reduced shadow on mobile hover */
+    }
+}
