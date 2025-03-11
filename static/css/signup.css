@@ -1,0 +1,279 @@
+/* signup.css - Signup Page Styles (Initially copy of login.css) - Light Theme */
+
+/* General Body and Container Styles */
+.login-body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #444;
+    background-color: #f9f9f9;
+    background-image: url('../images/login.jpeg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* REMOVED: .login-body::before - White Overlay Removed */
+
+
+.login-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 420px;
+    width: 90%;
+    padding: 35px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+    margin-right: 7%;
+}
+
+
+/* Form Side Styles (Full Width within Container) */
+.login-form-side {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    background-color: transparent;
+    backdrop-filter: none;
+}
+
+
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-header h1 a {
+    color: #00bcd4;
+    text-decoration: none;
+    font-size: 2.0em;
+    font-weight: 600;
+    display: block;
+}
+
+
+.auth-switch {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.auth-button {
+    background: transparent;
+    border: none;
+    color: #666;
+    padding: 8px 15px;
+    font-size: 1.0em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    margin: 0 10px;
+}
+
+.auth-button.active {
+    color: #333;
+    border-bottom-color: #00bcd4;
+}
+
+.auth-button:hover {
+    color: #555;
+}
+
+
+.login-form-container {
+    width: 95%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+
+.login-form .form-group {
+    margin-bottom: 15px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #444;
+    font-size: 0.95em;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.login-form input::placeholder {
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.login-form input:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 4px rgba(0, 188, 212, 0.2);
+}
+
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.remember-me input {
+    width: auto;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-bottom: none;
+    transform: scale(1.0);
+}
+
+.forgot-password {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.forgot-password:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+
+.login-form button.button {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #7cb342;
+    color: #fff;
+    font-size: 1.0em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 188, 212, 0.25);
+}
+
+.login-form button.button:hover {
+    background-color: #558b2f;
+    box-shadow: 0 4px 10px rgba(0, 172, 193, 0.3);
+    transform: scale(1.02);
+}
+
+
+.signup-link {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+}
+
+.signup-link a {
+    color: #00bcd4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+
+/* Responsive Adjustments (Basic - Adjust as needed) */
+@media (max-width: 768px) {
+    .login-body {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        padding: 25px;
+        max-width: 90%;
+        border-radius: 14px;
+        margin-right: 0;
+    }
+
+    .login-header {
+        margin-bottom: 15px;
+    }
+
+    .login-header h1 a {
+        font-size: 1.8em;
+    }
+
+
+    .auth-switch {
+        margin-bottom: 15px;
+    }
+
+    .auth-button {
+        font-size: 1.0em;
+        padding: 8px 15px;
+        margin: 0 10px;
+    }
+
+    .login-form-container {
+        max-width: 95%;
+    }
+
+    .welcome-text {
+        font-size: 1.0em;
+        margin-bottom: 15px;
+    }
+
+
+    .login-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .login-form input {
+        font-size: 0.95em;
+        padding: 10px 14px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .form-options {
+        margin-bottom: 15px;
+    }
+
+
+    .login-form button.button {
+        font-size: 1.05em;
+        padding: 12px 25px;
+        border-radius: 12px;
+    }
+
+    .signup-link {
+        margin-top: 15px;
+    }
+}
