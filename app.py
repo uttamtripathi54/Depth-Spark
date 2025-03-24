@@ -44,16 +44,16 @@ def how_it_works_section():
     return render_template('index.html')
 
 @app.route('/about')
-def about_section():
-    return render_template('index.html')
+def about():
+    return render_template('about.html')
 
 @app.route('/faq')
 def faq_section():
     return render_template('index.html')
 
-@app.route('/contact-us')
-def contact_us_section():
-    return render_template('index.html')
+@app.route('/contact-us') #  The CORRECTED ROUTE - for Contact Us page
+def contact_us():         #  Function named 'contact_us' matches url_for in HTML
+    return render_template('contact_us.html') # Make sure you have contact_us.html in templates
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

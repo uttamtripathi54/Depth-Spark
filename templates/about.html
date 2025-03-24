@@ -1,0 +1,588 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <section class="about-hero-section enhanced-hero">
+        <div class="about-hero-container container">
+            <h1>About Depth Spark</h1>
+            <p class="hero-subtitle">Transforming your 2D images into stunning 3D experiences with accessible, advanced technology.</p>
+        </div>
+    </section>
+
+    <section class="about-section about-story enhanced-story" id="our-story">
+        <div class="about-container container story-layout">
+            <div class="story-text">
+                <h3>Our Story</h3>
+                <p>Depth Spark was founded on a simple idea: make powerful 3D image transformation easy for everyone. We saw the limitations of 2D images and the complexity of existing 3D tools. So, we created a platform that uses smart AI to convert your photos into immersive 3D experiences, effortlessly and affordably.</p>
+                <p>Our journey involved deep dives into AI and image processing, developing our own unique algorithms. We listened to early users and constantly improved our technology. Today, Depth Spark reflects our dedication to quality, user-friendliness, and the exciting potential of 3D for all.</p>
+            </div>
+            <div class="story-image">
+                <img src="{{ url_for('static', filename='images/about.jpeg') }}" alt="The Story of Depth Spark">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section about-mission-vision enhanced-mission-vision" id="mission-vision">
+        <div class="about-container container mission-vision-layout">
+            <div class="mission-block">
+                <img src="{{ url_for('static', filename='images/mission.gif') }}" alt="Our Mission GIF" style="width: 100px; height: 100px; margin-bottom: 20px;">
+                <h3>Our Mission</h3>
+                <p>To provide the most user-friendly and effective 2D to 3D image conversion service, empowering creativity and enhancing visual communication.</p>
+            </div>
+            <div class="vision-block">
+                <img src="{{ url_for('static', filename='images/vision.gif') }}" alt="Our Vision GIF" style="width: 100px; height: 100px; margin-bottom: 20px;">
+                <h3>Our Vision</h3>
+                <p>To be the leading global platform for 3D image transformation, recognized for our innovation, accessibility, and transformative impact.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section about-values enhanced-values" id="values">
+        <div class="about-container container">
+            <h3>Our Values</h3>
+            <ul class="value-list condensed-values">
+                <li class="value-item">
+                    <img src="{{ url_for('static', filename='images/innovation.gif') }}" alt="Innovation GIF" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <h4>Innovation</h4>
+                    <p>Pushing tech boundaries for continuous improvement.</p>
+                </li>
+                <li class="value-item">
+                    <img src="{{ url_for('static', filename='images/accessibility.gif') }}" alt="Accessibility GIF" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <h4>Accessibility</h4>
+                    <p>Making powerful tools easy and available to all.</p>
+                </li>
+                <li class="value-item">
+                    <img src="{{ url_for('static', filename='images/quality.gif') }}" alt="Quality GIF" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <h4>Quality</h4>
+                    <p>Delivering stunning, high-fidelity 3D conversions.</p>
+                </li>
+                <li class="value-item">
+                    <img src="{{ url_for('static', filename='images/value.gif') }}" alt="Value GIF" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <h4>Value</h4>
+                    <p>Providing advanced tech at an accessible price.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="about-section about-team enhanced-team" id="team">
+        <div class="about-container container">
+            <h2>Meet the Depth Spark Team</h2>
+            <div class="team-profiles enhanced-team-profiles">
+                <div class="team-member">
+                    <div class="team-profile-pic">
+                        <img src="{{ url_for('static', filename='images/uttam.jpg') }}" alt="Uttam Tripathi">
+                    </div>
+                    <h3>Uttam Tripathi</h3>
+                    <p class="team-role">Co-founder & Lead Developer</p>
+                    <p class="team-bio">Uttam is the technical driving force behind Depth Spark. With a strong background in Computer Science and a passion for AI and image processing, Uttam leads the development and innovation of our core 2D to 3D conversion technology.</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-profile-pic">
+                        <img src="{{ url_for('static', filename='images/parul.jpg') }}" alt="Parul Sharma">
+                    </div>
+                    <h3>Parul Sharma</h3>
+                    <p class="team-role">Co-founder & Design Lead</p>
+                    <p class="team-bio">Parul spearheads the design and user experience of Depth Spark. With a background in design and a keen eye for visual aesthetics, Parul ensures that Depth Spark is not only powerful but also intuitive and enjoyable to use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section about-technology enhanced-technology" id="technology">
+        <div class="about-container container technology-layout">
+            <div class="technology-icon">
+                <img src="{{ url_for('static', filename='images/technology.gif') }}" alt="Our Technology GIF" style="width: 100px; height: 100px;">
+            </div>
+            <div class="technology-text">
+                <h3>Our Technology</h3>
+                <p>Depth Spark uses smart Artificial Intelligence to quickly and accurately convert your 2D images into 3D. Our unique technology analyzes your images to understand depth and automatically creates realistic 3D models. We're always working to improve our AI, making your 3D conversions even better and easier.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section enhanced-cta">
+        <div class="container">
+            <h2>Ready to Experience Depth Spark?</h2>
+            <p style="color: #fff; text-align: center;">Transform your images and explore the captivating world of 3D conversion today.</p>
+            <a href="/convert" class="button">Get Started Now</a>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block css %}
+
+<style>
+    /* about.css - ENHANCED VISUAL APPEAL - CONDENSED VALUES - IMAGE FIX - FURTHER ENHANCEMENTS */
+
+/* General Styles (Keep) */
+body {
+    padding-top: 90px;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+main {
+    padding-top: 0;
+}
+
+/* Enhanced Hero Section */
+/* Enhanced Hero Section */
+.about-hero-section.enhanced-hero {
+    background-image: url('/static/images/about_herosection.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    padding: 150px 0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(0, 89, 115, 0.3), rgba(0, 188, 212, 0.2)), url('/static/images/about_herosection.jpg'); /* Lightened Gradient and Background Image */
+    background-size: cover; /* Ensure image still covers */
+    background-position: center; /* Ensure image position is maintained */
+}
+
+.about-hero-section.enhanced-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly lighter overlay for text contrast */
+    z-index: -1;
+}
+
+.about-hero-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0; /* Initial opacity for animation */
+    transform: translateY(20px); /* Initial position for animation */
+    animation: fadeIn 1s ease-out 0.3s forwards; /* Text Animation */
+}
+
+.about-hero-container h1 {
+    font-size: 4.2em;
+    margin-bottom: 20px; /* Reduced margin */
+    letter-spacing: -1.5px;
+    line-height: 1.0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.about-hero-container .hero-subtitle {
+    font-size: 1.6em;
+    line-height: 1.9;
+    font-weight: 400;
+    margin-bottom: 30px; /* Added margin */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Our Story Section */
+.about-section.enhanced-story {
+    padding: 80px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.story-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Image Placement (Right) */
+    align-items: center;
+    gap: 50px;
+}
+
+.story-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Image Styling (Shadow) */
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.story-image img:hover {
+    transform: scale(1.05);
+}
+
+.story-text {
+    order: -1; /* Ensure text comes before image in the grid */
+}
+
+.story-text h3 {
+    display: block;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 2.8em;
+    margin-bottom: 25px;
+    background: none;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #00bcd4;
+    display: inline-block;
+}
+
+.story-text h3::after {
+    display: none;
+}
+
+.story-text p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* Enhanced Mission & Vision Section */
+.about-section.enhanced-mission-vision {
+    padding: 70px 0;
+    background-color: #f9f9f9;
+}
+
+.mission-vision-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.mission-block, .vision-block {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.mission-block:hover, .vision-block:hover {
+    transform: scale(1.05); /* Subtle Animations */
+}
+
+.mission-block h3, .vision-block h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.mission-block p, .vision-block p {
+    font-size: 1.15em;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Enhanced Our Values Section */
+.about-section.enhanced-values {
+    padding: 80px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.about-section.enhanced-values h3 {
+    font-size: 2.8em;
+    color: #333;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #7cb342;
+    background: none;
+    -webkit-background-clip: initial;
+    color: inherit;
+    display: inline-block;
+}
+
+.about-section.enhanced-values h3::after {
+    display: none;
+}
+
+.value-list.condensed-values {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Layout Enhancement */
+    gap: 35px; /* Slightly increased gap */
+    margin-top: 50px;
+    text-align: center;
+}
+
+.value-list.condensed-values .value-item {
+    background-color: #fefefe;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+.value-list.condensed-values .value-item:hover {
+    transform: translateY(-5px) scale(1.02); /* Slightly more pronounced hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.value-list.condensed-values .value-item i {
+    display: none; /* Hide the original icon tag */
+}
+
+.value-list.condensed-values .value-item img {
+    margin-bottom: 10px; /* Adjusted margin */
+}
+
+.value-list.condensed-values .value-item h4 {
+    font-size: 1.4em;
+    color: #444;
+    margin-bottom: 8px; /* Adjusted margin */
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.value-list.condensed-values .value-item p {
+    font-size: 1.0em;
+    color: #777;
+    line-height: 1.6;
+}
+
+/* Enhanced Meet the Team Section */
+.about-section.enhanced-team {
+    padding: 90px 0;
+    background-color: #f9f9f9;
+}
+
+.about-section.enhanced-team h2 {
+    font-size: 3.0em;
+    color: #333;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.enhanced-team-profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Layout Enhancement */
+    gap: 40px; /* Adjusted gap */
+    margin-top: 50px;
+}
+
+.team-member {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    border: 1px solid #eee;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center center;
+    margin-bottom: 20px; /* Adjusted margin */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 5px solid #f9f9f9;
+    overflow: hidden;
+}
+
+.team-profile-pic img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.team-member h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.team-role {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 15px; /* Adjusted margin */
+    display: block;
+    font-size: 1.1em;
+}
+
+.team-bio {
+    font-size: 1.15em;
+    color: #666;
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* Enhanced About Technology Section (GIF Instead of Icon) */
+.about-section.enhanced-technology {
+    padding: 70px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.technology-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.technology-icon {
+    <img src="{{ url_for('static', filename='images/technology.gif') }}" alt="Our Technology GIF" style="width: 100px; height: 100px;">
+}
+
+.technology-text {
+    max-width: 60%;
+}
+
+.about-section.enhanced-technology h3 {
+    display: block;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 2.8em;
+    margin-bottom: 30px;
+    background: none;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #00bcd4;
+    display: inline-block;
+}
+
+.about-section.enhanced-technology h3::after {
+    display: none;
+}
+
+.about-section.enhanced-technology .about-container p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Enhanced CTA Section (Keep) */
+.cta-section.enhanced-cta {
+    background: linear-gradient(to right, #00bcd4, #00acc1);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px 0;
+}
+
+.cta-section.enhanced-cta h2 {
+    font-size: 2.4em;
+    margin-bottom: 20px;
+}
+
+.cta-section.enhanced-cta p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #e0f7fa;
+}
+
+/* Responsive adjustments (Keep) */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    main {
+        padding-top: 20px;
+    }
+
+    .about-hero-section.enhanced-hero {
+        padding: 120px 20px;
+    }
+
+    .about-hero-container h1 {
+        font-size: 3.2em;
+    }
+
+    .about-hero-container p {
+        font-size: 1.4em;
+    }
+
+    .about-section {
+        padding: 60px 20px;
+    }
+
+    .about-section h3 {
+        font-size: 2.4em;
+    }
+
+    .story-layout {
+        grid-template-columns: 1fr;
+        align-items: center; /* Keep alignment for mobile */
+        gap: 30px;
+    }
+
+    .story-image {
+        max-width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .story-text {
+        max-width: 100%;
+        order: 0; /* Reset order for mobile */
+    }
+
+    .mission-vision-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .value-list.condensed-values {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .enhanced-team-profiles {
+        grid-template-columns: 1fr;
+    }
+
+    .technology-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .technology-text {
+        max-width: 90%;
+    }
+}
+</style>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

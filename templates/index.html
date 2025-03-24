@@ -1,89 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Depth Spark - 2D to 3D Image Conversion</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1><a href="/">Depth Spark</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact-us">Contact Us</a></li>
-                </ul>
-            </nav>
-            <div class="header-auth">
-                <a href="/login">Log In</a>
-                <a href="/signup" class="button signup-button">Sign Up</a>
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero-section">
+    <div class="container hero-section-container">
+        <div class="hero-text">
+            <article>
+                <h1>Turn Your 2D Images into Stunning 3D in Seconds</h1>
+                <p>Effortlessly create captivating 3D animations, high-resolution static 3D images, and interactive
+                    3D models. Depth Spark empowers you to bring your visuals to life and engage your audience like
+                    never before - all for free.</p>
+                <a href="/convert" class="button">Try Depth Spark Now - It's Free!</a>
+            </article>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/hero.jpeg') }}"
+                alt="Example of 2D to 3D Conversion with Depth Spark">
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features">
+    <div class="container">
+        <h2>Why Choose Depth Spark?</h2>
+
+        <div class="feature">
+            <div class="feature-icon"><img src="{{ url_for('static', filename='images/ai.jpeg') }}"
+                    alt="AI-Powered Conversion for Best Results Icon"></div>
+            <h3>Animate with AI</h3>
+            <p>Get your 3D images in seconds! Our optimized AI processing ensures rapid conversion times, so you can
+                iterate quickly and meet deadlines.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon"><img src="{{ url_for('static', filename='images/high_quality.jpeg') }}"
+                    alt="Easy-to-Use Interface Icon"></div>
+            <h3>High Quality Result</h3>
+            <p>Uncompromising Image Quality. Depth Spark preserves every detail of your original 2D images, ensuring
+                stunningly realistic 3D animations without loss of fidelity or clarity.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon"><img src="{{ url_for('static', filename='images/zero_cost.jpeg') }}"
+                    alt="Lightning-Fast Conversion Icon"></div>
+            <h3>Zero Cost</h3>
+            <p>Access powerful 2D to 3D conversion technology completely free of charge. Unleash your 3D creativity
+                without any financial barriers or hidden costs.</p>
+        </div>
+    </div>
+</section>
+
+</section>
+<section class="inverted-section">
+    <div class="container inverted-container">
+        <div class="inverted-content">
+            <div class="inverted-image">
+                <video width="640" height="360" autoplay loop muted style="border-radius: 15px;">
+                    <source src="{{ url_for('static', filename='videos/3d_motion.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="inverted-text">
+                <h2>Effortlessly Convert Photos to 3D Motion Effects</h2>
+                <p>Upload your photo and wait for AI to convert the still photo to a cool 3D animation video. There
+                    are many camera movements to choose from, such as zoom, circle, vertical, and horizontal,
+                    helping you get any desired effects.</p>
+                <a href="#" class="button">Get Started Now</a>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <section class="hero-section">
-        <div class="container hero-section-container"> <div class="hero-text">
-                <article>
-                    <h1>Turn Your 2D Images into Stunning 3D in Seconds</h1>
-                    <p>Effortlessly create captivating 3D animations, high-resolution static 3D images, and interactive 3D models. Depth Spark empowers you to bring your visuals to life and engage your audience like never before - all for free.</p>
-                    <a href="/convert" class="button">Try Depth Spark Now - It's Free!</a>
-                </article>
+</section>
+<section class="conversion-section">
+    <div class="container conversion-container">
+        <div class="conversion-content">
+            <div class="conversion-text">
+                <h2>Rapid 2D to 3D Image Transformation</h2>
+                <p>Experience the speed of instant 3D conversion without sacrificing quality. Depth Spark delivers
+                    breathtaking 3D images from your 2D photos with exceptional speed and precision, perfect for
+                    demanding projects.</p>
+                <a href="#" class="button">Get Started Now</a>
             </div>
-            <div class="hero-image">
-                <img src="{{ url_for('static', filename='images/hero.jpeg') }}" alt="Example of 2D to 3D Conversion with Depth Spark">
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Unlock Powerful 3D Conversion Features</h2>
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/3d_motion.jpeg') }}" alt="Create Engaging 3D Animations Easily Icon"></div>
-                <h3>Animate Your Images in 3D</h3>
-                <p>Transform static photos into dynamic 3D animations that capture attention and boost engagement. Perfect for social media, presentations, and marketing campaigns.</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/3d_image.jpeg') }}" alt="Generate High-Resolution 3D Images Icon"></div>
-                <h3>High-Resolution 3D Images</h3>
-                <p>Generate stunning, high-resolution 3D images from your 2D photos, ideal for professional use, printing, and detailed visualizations.</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/3d_model.jpeg') }}" alt="Create Interactive 3D Models Icon"></div>
-                <h3>Interactive 3D Models</h3>
-                <p>Create interactive 3D models that users can rotate and explore, perfect for e-commerce, educational content, and immersive web experiences.</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/zero_cost.jpeg') }}" alt="AI-Powered Conversion for Best Results Icon"></div>
-                <h3>Free 2D to 3D Conversion</h3>
-                <p>Access powerful 2D to 3D conversion technology completely free of charge. Unleash your 3D creativity without any financial barriers or hidden costs.</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/hand.jpeg') }}" alt="Easy-to-Use Interface Icon"></div>
-                <h3>Easy-to-Use Interface</h3>
-                <p>Enjoy a simple, user-friendly platform designed for everyone.  No technical skills required to transform your images into stunning 3D visuals.</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/ai.jpeg') }}" alt="Lightning-Fast Conversion Icon"></div>
-                <h3>Lightning-Fast Conversion</h3>
-                <p>Get your 3D images in seconds! Our optimized AI processing ensures rapid conversion times, so you can iterate quickly and meet deadlines.</p>
+            <div class="conversion-image">
+                <img src="{{ url_for('static', filename='images/3d_image.jpg') }}" alt="Fast 3D Image Conversion">
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="how-it-works" class="how-it-works">
+</section>
+<section class="inverted-section" id="showcase-3d-models">
+    <div class="inverted-container container">
+        <div class="inverted-content">
+            <div class="inverted-image">
+                <img src="{{ url_for('static', filename='images/3d_model.png') }}"
+                    alt="Interactive 3D Model Exploration">
+            </div>
+            <div class="inverted-text">
+                <h2>Interactive 3D Model Exploration</h2>
+                <p>Step into the immersive world of 3D. Depth Spark converts your photos into interactive 3D models
+                    for unprecedented exploration. Rotate, zoom, and uncover hidden details in every conversion.
+                    Experience your images in a dynamic, brand new dimension.</p>
+                <a href="/convert" class="button">Experience 3D Models Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <section id="how-it-works" class="how-it-works"> 
         <div class="container">
             <h2>Create 3D Images in 3 Simple Steps</h2>
             <ol>
@@ -94,29 +119,16 @@
 
                 <li class="step">
                     <h3>Step 2: Choose Your 3D Conversion</h3>
-                    <p>Select the type of 3D output you need: Animated 3D Motion, Static 3D Image, or Interactive 3D Model.</p>
+                    <p>Select the type of 3D output you need: Animated 3D Motion, Static 3D Image, or Interactive 3D
+                        Model.</p>
                 </li>
 
                 <li class="step">
                     <h3>Step 3: Download Your 3D Masterpiece</h3>
-                    <p>Preview and download your stunning 3D result, instantly generated by our powerful AI engine.</p>
+                    <p>Preview and download your stunning 3D result, instantly generated by our powerful AI engine.
+                    </p>
                 </li>
             </ol>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container about-container">
-            <div class="about-image">
-                <img src="{{ url_for('static', filename='images/about2.jpeg') }}" alt="About Depth Spark - Team Image or Illustration">
-            </div>
-            <div class="about-text">
-                <article>
-                    <h2>About Depth Spark - Transforming 2D to 3D for Everyone</h2>
-                    <p>Tired of flat, static images? Depth Spark was created to solve this problem. We believe that 3D visuals should be accessible to everyone, from individual creators to large businesses. Our mission is to provide a free, easy-to-use, and powerful tool that anyone can use to bring their images to life in 3D.</p>
-                    <p>Our mission is to democratize 3D technology and make it available to everyone. Founded in 2025, Depth Spark is at the forefront of AI-driven 3D conversion. We are committed to continuous innovation and improving our technology to provide you with the best 2D to 3D conversion experience possible. Join us on this exciting journey and start sparking depth in your images today!</p>
-                </article>
-            </div>
         </div>
     </section>
 
@@ -128,73 +140,60 @@
                     <summary>
                         <h3>What image formats does Depth Spark support?</h3>
                     </summary>
-                    <p>Depth Spark supports a wide range of common image formats, including: JPEG, PNG, and GIF. We are continuously working to expand format support based on user needs.</p>
+                    <p>Depth Spark supports a wide range of common image formats, including: JPEG, PNG, and GIF. We
+                        are continuously working to expand format support based on user needs.</p>
                 </details>
 
                 <details class="faq-item">
                     <summary>
                         <h3>Is Depth Spark really free to use? Are there any limitations?</h3>
                     </summary>
-                    <p>Yes, Depth Spark is currently offered as a free service to make 2D to 3D conversion accessible. While it's free, usage terms apply to ensure fair access for everyone.  For extremely high-volume or commercial use, please contact us for potential enterprise solutions.</p>
+                    <p>Yes, Depth Spark is currently offered as a free service to make 2D to 3D conversion
+                        accessible. While it's free, usage terms apply to ensure fair access for everyone. For
+                        extremely high-volume or commercial use, please contact us for potential enterprise
+                        solutions.</p>
                 </details>
 
                 <details class="faq-item">
                     <summary>
                         <h3>How fast is the 2D to 3D conversion process?</h3>
                     </summary>
-                    <p>Leveraging our Lightning-Fast AI, most 2D to 3D conversions are completed in just moments – typically under a minute.  Processing time may slightly increase for very large or complex images.</p>
+                    <p>Leveraging our Lightning-Fast AI, most 2D to 3D conversions are completed in just moments –
+                        typically under a minute. Processing time may slightly increase for very large or complex
+                        images.</p>
                 </details>
 
                 <details class="faq-item">
                     <summary>
                         <h3>What is the quality of the 3D output?</h3>
                     </summary>
-                    <p>Depth Spark utilizes advanced AI models to ensure high-quality 3D conversions across all output types (Motion, Static, Model).  While results are generally excellent, source image quality significantly impacts the final 3D output. For best results, use clear, well-lit 2D images.</p>
+                    <p>Depth Spark utilizes advanced AI models to ensure high-quality 3D conversions across all
+                        output types (Motion, Static, Model). While results are generally excellent, source image
+                        quality significantly impacts the final 3D output. For best results, use clear, well-lit 2D
+                        images.</p>
                 </details>
 
                 <details class="faq-item">
                     <summary>
                         <h3>How secure and private is Depth Spark? Is my data protected?</h3>
                     </summary>
-                    <p>Yes, data security and user privacy are top priorities.  Uploaded images are processed securely and are not stored permanently. We employ industry-standard security protocols to protect your data and ensure confidentiality throughout the conversion process.</p>
+                    <p>Yes, data security and user privacy are top priorities. Uploaded images are processed
+                        securely and are not stored permanently. We employ industry-standard security protocols to
+                        protect your data and ensure confidentiality throughout the conversion process.</p>
                 </details>
             </ul>
         </div>
     </section>
+</section>
 
-    <section id="contact-us" class="contact-us">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>We'd love to hear from you! Send us a message using the form below.</p>
-            <form action="#" method="post" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="button">Send Message</button>
-            </form>
-        </div>
-    </section>
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Spark Depth in Your Images?</h2>
+        <p style="color: #fff;">Join creators and businesses already transforming their visuals with Depth Spark. It's
+            free, fast, and
+            incredibly powerful. Convert your image and see the magic now!</p>
+        <a href="/convert" class="button">Convert Your Image Now - Free!</a>
+    </div>
+</section>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Spark Depth in Your Images?</h2>
-            <p>Join creators and businesses already transforming their visuals with Depth Spark. It's free, fast, and incredibly powerful. Convert your image and see the magic now!</p>
-            <a href="/convert" class="button">Convert Your Image Now - Free!</a>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Depth Spark</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
