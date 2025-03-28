@@ -221,21 +221,21 @@ nav ul li a:hover {
     transform: translateY(-1px);
 }
 
-/* Features Section Styles (Keep as is) */
+/* Features Section Styles (Enhanced Appeal) */
 .features {
     background-color: #f9f9f9;
     margin-top: 0;
-    padding: 35px 0; /* Inherit padding from .section-base now */
+    padding: 35px 0;
 }
 
 .features .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    max-width: 1300px; /* Inherit max-width and padding from .section-base .container now */
+    max-width: 1300px;
 }
 
-.features h2, .how-it-works h2, .about h2, .contact-us h2 { /* Unified section heading styles */
+.features h2 {
     font-size: 2.2em;
     color: #333;
     margin-bottom: 25px;
@@ -244,22 +244,15 @@ nav ul li a:hover {
     position: relative;
     padding-bottom: 15px;
     letter-spacing: -0.5px;
-    background: linear-gradient(to right, #7cb342, #558b2f);
+    background: linear-gradient(to right, #00bcd4, #7cb342);
     -webkit-background-clip: text;
     color: transparent;
     display: inline-block;
     padding-bottom: 3px;
-}
-
-.features h2 {
     grid-column: 1 / -1;
-    background: linear-gradient(to right, #00bcd4, #7cb342); /* Using both primary and secondary theme colors */
-    -webkit-background-clip: text;
-    color: transparent; /* Re-apply color: transparent */
 }
 
-
-.features h2::after, .how-it-works h2::after, .faq h2::after, .contact-us h2::after, .about h2::after { /* Unified section heading underline styles */
+.features h2::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -271,74 +264,97 @@ nav ul li a:hover {
     border-radius: 2px;
 }
 
-.features h2::after {
-    background: linear-gradient(to right, #7cb342, #558b2f); /* Re-apply green gradient specifically for Features section */
-}
-
-
 .feature {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px; /* Slightly more rounded */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
     background-color: #fff;
     border: 1px solid #e0e0e0;
-}
-
-.feature:first-child {
-    transform: scale(1.03);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
-    z-index: 1;
-}
-
-.feature:hover,
-.features .feature:not(:first-child):hover,
-.features .feature:first-child:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.feature-icon {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    padding: 6px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 300px;
 }
 
-.feature-icon img {
-    max-width: 100%;
-    height: auto;
+.feature:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.feature-image-container {
+    position: relative; /* For overlaying the title */
+    width: 100%;
+    height: 100%; /* Image covers the whole card */
+    overflow: hidden;
+    border-radius: 10px; /* Match card border-radius */
+}
+
+.feature-image-container img {
     display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
 }
 
-.feature h3, .step h3, .faq-item h3 { /* Unified card heading styles */
+.feature-image-container h3 {
+    position: absolute;
+    bottom: 15px; /* Title at the bottom */
+    left: 15px;
+    color: white; /* Style the title text */
+    font-size: 1.8em; /* Adjust title size */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+    margin: 0;
+    padding: 10px; /* Add some padding around the title */
+    border-radius: 5px; /* Optional: Add border-radius to the title background */
+}
+
+.reveal-icon {
+    position: absolute; /* Position relative to the .feature card */
+    top: 10px;
+    right: 10px;
     font-size: 1.5em;
-    color: #444;
-    margin-bottom: 14px;
-    font-weight: 600;
-    /* text-align: center; */
-    line-height: 1.3;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease-in-out, background-color 0.2s ease-in-out;
+    z-index: 3;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.3); /* Add a background for better visibility on the image */
 }
 
-.feature p, .step p, .faq-item p, .about p, .contact-us p, .hero-text p, .inverted-text p, .conversion-text p, .cta-section p { /* Unified paragraph styles */
+.reveal-icon:hover { /* Clearer hover indication for the icon */
+    color: #fff;
+    background-color: #00bcd4; /* A more prominent background color */
+}
+
+.feature-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: left;
     font-size: 1.1em;
-    color: #777;
+    color: #fff; /* Changed text color to white for visibility on blurred image */
     line-height: 1.7;
     font-weight: 400;
-    text-align: left; /* Default to left for text-heavy sections */
+    /* REMOVE THIS LINE: background-color: rgba(255, 255, 255, 0.9); */
+    clip-path: circle(0px at calc(100% - 20px) 20px);
+    transition: clip-path 0.4s ease-in-out;
+    border-radius: 15px; /* Match card border-radius */
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3); /* Slightly darker translucent background */
+    backdrop-filter: blur(4px); /* Adjusted blur intensity */
+    padding-top: 45px; /* Added padding to push content below the icon */
 }
 
-.feature p, .step p, .faq-item p, .about p, .contact-us p, .cta-section p {
-    /* text-align: center; Center align paragraphs in card-like sections and CTA */
+.reveal-icon:hover + .feature-content { /* Target the sibling .feature-content */
+    clip-path: circle(150% at calc(100% - 20px) 20px); /* Expand the circle to cover the card */
 }
 
 /* How It Works Section Styles (Adjusted GIF Positioning) */
