@@ -1,6 +1,1270 @@
 {% extends "base.html" %}
+
+{% block title %}Convert 2D to 3D | Depth Spark{% endblock %}
+
+{% block css %}
+<style>
+    /* Convert Page Specific Styles */
+    .convert-section {
+        padding: 80px 20px;
+        background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+        min-height: 100vh;
+    }
+
+    .convert-header {
+        text-align: center;
+        margin-bottom: 60px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    .convert-header h1 {
+        font-size: 3.2em;
+        color: #333;
+        margin-bottom: 20px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+        -webkit-background-clip: text;
+        color: transparent;
+        position: relative;
+        display: inline-block;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .convert-header h1::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 5px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+        border-radius: 3px;
+    }
+
+    .convert-header p {
+        font-size: 1.4em;
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    /* Input Section */
+    .input-section {
+        max-width: 900px;
+        margin: 0 auto 60px;
+        text-align: center;
+        position: relative;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .input-section::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        background: linear-gradient(135deg, #00bcd4, #7cb342);
+        z-index: -1;
+        border-radius: 25px;
+        opacity: 0.7;
+        filter: blur(10px);
+    }
+
+    .input-container {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .url-input {
+        flex: 1;
+        padding: 18px 25px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1.2em;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        background: #f9f9f9;
+    }
+    /* Add these responsive styles at the end of your CSS section */
+@media (max-width: 992px) {
+    .url-input {
+        font-size: 1.1em;
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .url-input {
+        font-size: 1em;
+        padding: 14px 16px;
+    }
+    
+    /* Also adjust the placeholder text specifically */
+    .url-input::placeholder {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 576px) {
+    .url-input {
+        font-size: 1.0em;
+        padding: 12px 14px;
+    }
+    
+    .url-input::placeholder {
+        font-size: 0.85em;
+    }
+}
+
+    .url-input:focus {
+        border-color: #00bcd4;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.2);
+        background: white;
+    }
+
+    .url-submit-btn {
+        padding: 18px 35px;
+        background: linear-gradient(to right, #00bcd4, #00acc1);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 1.2em;
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .url-submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3);
+    }
+
+    .url-submit-btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+    }
+
+    .url-submit-btn:hover::after {
+        transform: translateX(100%);
+    }
+
+    .or-divider {
+        display: flex;
+        align-items: center;
+        margin: 30px 0;
+        color: #777;
+        font-weight: 600;
+        font-size: 1.1em;
+        position: relative;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+        content: '';
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #ddd, transparent);
+        margin: 0 20px;
+    }
+
+    .upload-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 18px 45px;
+        background: linear-gradient(to right, #7cb342, #558b2f);
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        font-weight: 600;
+        font-size: 1.2em;
+        box-shadow: 0 5px 15px rgba(124, 179, 66, 0.2);
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .upload-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(124, 179, 66, 0.3);
+    }
+
+    .upload-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: 0.5s;
+    }
+
+    .upload-btn:hover::before {
+        left: 100%;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    /* Preview Section */
+    .preview-container {
+        display: none;
+        max-width: 900px;
+        margin: 0 auto 60px;
+        text-align: center;
+        animation: fadeIn 0.6s ease;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .preview-image {
+        max-width: 100%;
+        max-height: 500px;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+        border: 1px solid #eee;
+        transition: transform 0.3s ease;
+    }
+
+    .preview-image:hover {
+        transform: scale(1.02);
+    }
+
+    .preview-container p {
+        font-size: 1.3em;
+        color: #666;
+        margin-top: 15px;
+    }
+
+    /* Options Section */
+    .options-section {
+        max-width: 1100px;
+        margin: 0 auto 70px;
+        padding: 50px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .options-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+    }
+
+    .options-section h2 {
+        font-size: 2em;
+        color: #444;
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+        font-weight: 700;
+    }
+
+    .options-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+        border-radius: 2px;
+    }
+
+    .option-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+    }
+
+    .option-card {
+        flex: 1;
+        /*min-width: 250px;*/ /* Adjusted for better responsiveness */
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        cursor: pointer;
+        border: 3px solid transparent;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .option-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+
+    .option-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .option-card.selected {
+        border-color: rgba(0, 188, 212, 0.3);
+        background-color: #f8fdfe;
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 188, 212, 0.15);
+    }
+
+    .option-card.selected::before {
+        transform: scaleX(1);
+    }
+
+    .option-icon {
+        font-size: 3em;
+        color: #00bcd4;
+        margin-bottom: 20px;
+        transition: all 0.4s ease;
+    }
+
+    .option-card.selected .option-icon {
+        color: #7cb342;
+        transform: scale(1.15);
+    }
+
+    .option-title {
+        font-size: 1.5em;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .option-card:hover .option-title {
+        color: #00bcd4;
+    }
+
+    .option-desc {
+        font-size: 1.1em;
+        color: #666;
+        line-height: 1.7;
+    }
+
+    /* Convert Button */
+    .convert-btn-container {
+        text-align: center;
+        margin: 50px auto;
+        max-width: 900px;
+    }
+
+    .convert-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 60px;
+        background: linear-gradient(to right, #00bcd4, #00acc1);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        font-size: 1.4em;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        box-shadow: 0 15px 35px rgba(0, 188, 212, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .convert-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 45px rgba(0, 188, 212, 0.4);
+        background: linear-gradient(to right, #00acc1, #0097a7);
+    }
+
+    .convert-btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .convert-btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -60%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(30deg);
+        transition: all 0.7s ease;
+    }
+
+    .convert-btn:hover::after {
+        left: 100%;
+    }
+
+    /* Loading Animation */
+    .loading-animation {
+        display: none;
+        text-align: center;
+        margin: 70px auto;
+        max-width: 900px;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .spinner {
+        width: 80px;
+        height: 80px;
+        border: 10px solid #f0f0f0;
+        border-top: 10px solid #00bcd4;
+        border-radius: 50%;
+        animation: spin 1.2s linear infinite;
+        margin: 0 auto 30px;
+        position: relative;
+    }
+
+    .spinner::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 10px solid transparent;
+        border-top-color: #7cb342;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite reverse;
+        opacity: 0.7;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+        font-size: 1.4em;
+        color: #666;
+        font-weight: 500;
+    }
+
+    /* Result Container */
+    .result-container {
+        display: none;
+        margin: 70px auto;
+        max-width: 1300px;
+        text-align: center;
+        animation: fadeIn 1s ease;
+    }
+
+    .result-title {
+        font-size: 2.5em;
+        color: #333;
+        margin-bottom: 40px;
+        position: relative;
+        display: inline-block;
+        font-weight: 700;
+    }
+
+    .result-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 5px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+        border-radius: 3px;
+    }
+
+    /* Preview Containers */
+    .preview-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
+    .preview-box {
+        flex: 1;
+        min-width: 550px;
+        padding: 40px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .preview-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(to right, #00bcd4, #7cb342);
+    }
+
+    .preview-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+    }
+
+    .preview-box h3 {
+        font-size: 1.6em;
+        color: #444;
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    /* 3D Model Viewer Container */
+    .model-viewer-container {
+        width: 100%;
+        height: 450px;
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 25px;
+        border: 1px solid #eee;
+        background: #f5f5f5;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #interactiveModel {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 3D Motion Video Container */
+    .motion-video-container {
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #motionVideo {
+        width: 100%;
+        max-height: 450px;
+        object-fit: contain;
+        background: #000;
+        border-radius: 15px;
+    }
+
+    /* 3D Static Image Container */
+    .static-image-container {
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #staticImage {
+        width: 100%;
+        max-height: 450px;
+        object-fit: contain;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    #staticImage:hover {
+        transform: scale(1.03);
+    }
+
+    /* Controls */
+    .viewer-controls {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .control-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: linear-gradient(to right, #00bcd4, #00acc1);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2);
+    }
+
+    .control-btn:hover {
+        background: linear-gradient(to right, #00acc1, #0097a7);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+    }
+
+    .download-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 35px;
+        background: linear-gradient(to right, #7cb342, #558b2f);
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.4s ease;
+        font-size: 1.2em;
+        margin-top: 30px;
+        box-shadow: 0 10px 25px rgba(124, 179, 66, 0.2);
+    }
+
+    .download-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(124, 179, 66, 0.3);
+        background: linear-gradient(to right, #558b2f, #407024);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+        .convert-header h1 {
+            font-size: 2.8em;
+        }
+        
+        .convert-header p {
+            font-size: 1.3em;
+        }
+        
+        .preview-box {
+            min-width: 450px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .convert-header h1 {
+            font-size: 2.4em;
+        }
+        
+        .convert-header p {
+            font-size: 1.2em;
+        }
+        
+        .input-container {
+            flex-direction: column;
+        }
+        
+        .url-submit-btn, .upload-btn {
+            width: 100%;
+        }
+        
+        .option-group {
+            flex-direction: column;
+        }
+        
+        .preview-box {
+            min-width: 100%;
+            padding: 30px 20px;
+        }
+        
+        .model-viewer-container,
+        .motion-video-container,
+        .static-image-container {
+            height: 350px;
+        }
+        
+        .options-section {
+            padding: 40px 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .convert-header h1 {
+            font-size: 2em;
+        }
+        
+        .convert-section {
+            padding: 60px 15px;
+        }
+        
+        .input-section {
+            padding: 30px 20px;
+        }
+        
+        .preview-box h3 {
+            font-size: 1.4em;
+        }
+        
+        .viewer-controls {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
+<section class="convert-section">
+    <div class="convert-header">
+        <h1>Transform Your Images into Stunning 3D</h1>
+        <p>Bring your 2D images to life with our advanced conversion technology. Experience depth, dimension, and realism like never before.</p>
+    </div>
 
+    <!-- Input Section -->
+    <div class="input-section">
+        <h3 style="font-size: 1.6em; margin-bottom: 20px; color: #444;">Start Your 3D Journey</h3>
+        <div class="input-container">
+            <input type="url" id="urlInput" class="url-input" placeholder="Paste image URL (e.g., https://example.com/image.jpg)">
+            <button class="url-submit-btn" id="urlSubmitBtn">
+                <i class="fas fa-link"></i> Load URL
+            </button>
+        </div>
 
+        <div class="or-divider">OR</div>
 
+        <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-cloud-upload-alt"></i> Upload Image
+        </button>
+        <input type="file" id="fileInput" class="file-input" accept="image/*">
+    </div>
+
+    <!-- Preview Section -->
+    <div class="preview-container" id="previewContainer">
+        <img id="previewImage" class="preview-image" src="" alt="Preview">
+        <p>Your image is ready for magical 3D transformation!</p>
+    </div>
+
+    <!-- Options Section -->
+    <div class="options-section">
+        <h2>Choose Your 3D Experience</h2>
+        <div class="option-group">
+            <div class="option-card" data-option="animation">
+                <div class="option-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="option-title">3D Animation</h3>
+                <p class="option-desc">Bring your image to life with a dynamic 3D animation that showcases depth and perspective through smooth camera movements.</p>
+            </div>
+            <div class="option-card" data-option="static">
+                <div class="option-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3 class="option-title">Static 3D Image</h3>
+                <p class="option-desc">Get a high-quality 3D rendered image with depth effects that pop, perfect for presentations and digital art.</p>
+            </div>
+            <div class="option-card" data-option="interactive">
+                <div class="option-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3 class="option-title">Interactive 3D Model</h3>
+                <p class="option-desc">Explore every angle with a fully interactive 3D model you can rotate, zoom, and examine from all perspectives.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Convert Button -->
+    <div class="convert-btn-container">
+        <button class="convert-btn" id="convertBtn" disabled>
+            <i class="fas fa-magic"></i> Create 3D Masterpiece
+        </button>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-animation" id="loadingAnimation">
+        <div class="spinner"></div>
+        <p class="loading-text">Crafting your 3D vision... This may take a moment as we work our magic.</p>
+    </div>
+
+    <!-- Result Container -->
+    <div class="result-container" id="resultContainer">
+        <h2 class="result-title">Your 3D Creation is Ready!</h2>
+        
+        <div class="preview-wrapper">
+            <div class="preview-box" id="animationResult" style="display: none;">
+                <h3>3D Motion Animation</h3>
+                <div class="motion-video-container">
+                    <video id="motionVideo" controls autoplay loop muted>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="viewer-controls">
+                    <button class="control-btn" id="playPauseBtn">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="control-btn" id="restartBtn">
+                        <i class="fas fa-redo"></i> Restart
+                    </button>
+                </div>
+                <a href="#" class="download-btn" id="downloadAnimationBtn">
+                    <i class="fas fa-download"></i> Download Animation
+                </a>
+            </div>
+
+            <div class="preview-box" id="staticResult" style="display: none;">
+                <h3>Static 3D Image</h3>
+                <div class="static-image-container">
+                    <img id="staticImage" src="" alt="Static 3D Image">
+                </div>
+                <div class="viewer-controls">
+                    <button class="control-btn" id="zoomInBtn">
+                        <i class="fas fa-search-plus"></i> Zoom In
+                    </button>
+                    <button class="control-btn" id="zoomOutBtn">
+                        <i class="fas fa-search-minus"></i> Zoom Out
+                    </button>
+                    <button class="control-btn" id="resetViewBtn">
+                        <i class="fas fa-sync-alt"></i> Reset
+                    </button>
+                </div>
+                <a href="#" class="download-btn" id="downloadStaticBtn">
+                    <i class="fas fa-download"></i> Download 3D Image
+                </a>
+            </div>
+
+            <div class="preview-box" id="interactiveResult" style="display: none;">
+                <h3>Interactive 3D Model</h3>
+                <div class="model-viewer-container">
+                    <canvas id="interactiveModel"></canvas>
+                </div>
+                <div class="viewer-controls">
+                    <button class="control-btn" id="rotateBtn">
+                        <i class="fas fa-undo"></i> Rotate
+                    </button>
+                    <button class="control-btn" id="zoomIn3DBtn">
+                        <i class="fas fa-search-plus"></i> Zoom In
+                    </button>
+                    <button class="control-btn" id="zoomOut3DBtn">
+                        <i class="fas fa-search-minus"></i> Zoom Out
+                    </button>
+                    <button class="control-btn" id="reset3DBtn">
+                        <i class="fas fa-sync-alt"></i> Reset
+                    </button>
+                </div>
+                <a href="#" class="download-btn" id="downloadModelBtn">
+                    <i class="fas fa-download"></i> Download 3D Model
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Three.js Library for 3D Model Interaction -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const urlInput = document.getElementById('urlInput');
+        const urlSubmitBtn = document.getElementById('urlSubmitBtn');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('previewImage');
+        const convertBtn = document.getElementById('convertBtn');
+        const loadingAnimation = document.getElementById('loadingAnimation');
+        const resultContainer = document.getElementById('resultContainer');
+        
+        // 3D Result Elements
+        const animationResult = document.getElementById('animationResult');
+        const motionVideo = document.getElementById('motionVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const downloadAnimationBtn = document.getElementById('downloadAnimationBtn');
+        
+        const staticResult = document.getElementById('staticResult');
+        const staticImage = document.getElementById('staticImage');
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+        const resetViewBtn = document.getElementById('resetViewBtn');
+        const downloadStaticBtn = document.getElementById('downloadStaticBtn');
+        
+        const interactiveResult = document.getElementById('interactiveResult');
+        const modelCanvas = document.getElementById('interactiveModel');
+        const rotateBtn = document.getElementById('rotateBtn');
+        const zoomIn3DBtn = document.getElementById('zoomIn3DBtn');
+        const zoomOut3DBtn = document.getElementById('zoomOut3DBtn');
+        const reset3DBtn = document.getElementById('reset3DBtn');
+        const downloadModelBtn = document.getElementById('downloadModelBtn');
+        
+        const optionCards = document.querySelectorAll('.option-card');
+        
+        // State variables
+        let selectedFile = null;
+        let selectedOption = null;
+        let isPlaying = true;
+        let staticZoomLevel = 1;
+        
+        // Three.js variables
+        let scene, camera, renderer, model, controls;
+        let isRotating = false;
+        let rotationInterval;
+        let currentScale = 1;
+
+        // Event Listeners
+        urlSubmitBtn.addEventListener('click', loadImageFromUrl);
+        urlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loadImageFromUrl();
+        });
+
+        uploadBtn.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileUpload);
+
+        optionCards.forEach(card => {
+            card.addEventListener('click', selectOption);
+        });
+
+        convertBtn.addEventListener('click', startConversion);
+
+        // Video Controls
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        restartBtn.addEventListener('click', restartVideo);
+
+        // Static Image Controls
+        zoomInBtn.addEventListener('click', () => zoomStaticImage(1.2));
+        zoomOutBtn.addEventListener('click', () => zoomStaticImage(0.8));
+        resetViewBtn.addEventListener('click', resetStaticImage);
+
+        // 3D Model Controls
+        rotateBtn.addEventListener('click', toggleRotation);
+        zoomIn3DBtn.addEventListener('click', () => zoom3DModel(1.2));
+        zoomOut3DBtn.addEventListener('click', () => zoom3DModel(0.8));
+        reset3DBtn.addEventListener('click', reset3DModel);
+
+        // Functions
+        function loadImageFromUrl() {
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please enter an image URL');
+                return;
+            }
+            
+            convertBtn.disabled = true;
+            urlSubmitBtn.disabled = true;
+            urlSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            const testImage = new Image();
+            testImage.onload = function() {
+                selectedFile = {
+                    name: url.split('/').pop() || 'image.jpg',
+                    type: 'image/' + url.split('.').pop().toLowerCase(),
+                    url: url
+                };
+                
+                previewImage.src = url;
+                previewContainer.style.display = 'block';
+                
+                urlSubmitBtn.disabled = false;
+                urlSubmitBtn.innerHTML = '<i class="fas fa-link"></i> Load URL';
+                
+                updateConvertButton();
+            };
+            
+            testImage.onerror = function() {
+                alert('Could not load image from this URL. Please check the URL and try again.');
+                urlSubmitBtn.disabled = false;
+                urlSubmitBtn.innerHTML = '<i class="fas fa-link"></i> Load URL';
+            };
+            
+            testImage.src = url;
+        }
+
+        function handleFileUpload(e) {
+            const file = e.target.files[0];
+            
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPEG, PNG, etc.)');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'block';
+                updateConvertButton();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function selectOption() {
+            optionCards.forEach(card => card.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedOption = this.getAttribute('data-option');
+            updateConvertButton();
+        }
+
+        function updateConvertButton() {
+            convertBtn.disabled = !(selectedFile && selectedOption);
+        }
+
+        function startConversion() {
+            if (!selectedFile || !selectedOption) return;
+            
+            convertBtn.disabled = true;
+            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            loadingAnimation.style.display = 'block';
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                loadingAnimation.style.display = 'none';
+                convertBtn.innerHTML = '<i class="fas fa-magic"></i> Create 3D Masterpiece';
+                showConversionResult();
+            }, 3000);
+        }
+
+        function showConversionResult() {
+            // Hide all result types first
+            animationResult.style.display = 'none';
+            staticResult.style.display = 'none';
+            interactiveResult.style.display = 'none';
+            
+            // Show the appropriate result based on selected option
+            switch(selectedOption) {
+                case 'animation':
+                    showAnimationResult();
+                    break;
+                case 'static':
+                    showStaticResult();
+                    break;
+                case 'interactive':
+                    showInteractiveResult();
+                    break;
+            }
+            
+            resultContainer.style.display = 'block';
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showAnimationResult() {
+            animationResult.style.display = 'block';
+            
+            // In a real app, this would be the actual processed video
+            // For demo, we're using a sample video
+            motionVideo.src = "{{ url_for('static', filename='videos/sample_3d_animation.mp4') }}";
+            motionVideo.load();
+            
+            // Set download link (in a real app, this would be the processed file)
+            downloadAnimationBtn.href = motionVideo.src;
+            downloadAnimationBtn.download = '3d_animation_' + (selectedFile.name.replace(/\.[^/.]+$/, "") || 'animation') + '.mp4';
+        }
+
+        function showStaticResult() {
+            staticResult.style.display = 'block';
+            staticZoomLevel = 1;
+            
+            // In a real app, this would be the actual processed 3D image
+            // For demo, we're using the original with a mock effect
+            staticImage.src = previewImage.src;
+            staticImage.style.transform = `scale(${staticZoomLevel})`;
+            
+                        // Set download link
+                        downloadStaticBtn.href = staticImage.src;
+            downloadStaticBtn.download = '3d_static_' + (selectedFile.name || 'image.jpg');
+        }
+
+        function showInteractiveResult() {
+            interactiveResult.style.display = 'block';
+            
+            // Initialize Three.js scene if not already done
+            if (!renderer) {
+                init3DViewer();
+            }
+            
+            // In a real app, this would load the actual 3D model
+            // For demo, we're creating a simple textured plane
+            createDemoModel();
+            
+            // Set download link (in a real app, this would be the 3D model file)
+            downloadModelBtn.href = "#";
+            downloadModelBtn.onclick = function() {
+                alert('In a real application, this would download the 3D model file');
+                return false;
+            };
+        }
+
+        // Video Control Functions
+        function togglePlayPause() {
+            if (isPlaying) {
+                motionVideo.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+            } else {
+                motionVideo.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function restartVideo() {
+            motionVideo.currentTime = 0;
+            if (!isPlaying) {
+                motionVideo.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                isPlaying = true;
+            }
+        }
+
+        // Static Image Control Functions
+        function zoomStaticImage(factor) {
+            staticZoomLevel *= factor;
+            staticImage.style.transform = `scale(${staticZoomLevel})`;
+        }
+
+        function resetStaticImage() {
+            staticZoomLevel = 1;
+            staticImage.style.transform = `scale(${staticZoomLevel})`;
+        }
+
+        // 3D Model Control Functions
+        function init3DViewer() {
+            // Set up Three.js scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f0f0);
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, modelCanvas.offsetWidth / modelCanvas.offsetHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ canvas: modelCanvas, antialias: true });
+            renderer.setSize(modelCanvas.offsetWidth, modelCanvas.offsetHeight);
+            
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.25;
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = modelCanvas.offsetWidth / modelCanvas.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(modelCanvas.offsetWidth, modelCanvas.offsetHeight);
+            });
+        }
+
+        function createDemoModel() {
+            // Clear previous model if exists
+            if (model) {
+                scene.remove(model);
+            }
+            
+            // Create a simple textured plane for demo
+            const geometry = new THREE.PlaneGeometry(4, 4);
+            
+            // Create texture from the uploaded image
+            const texture = new THREE.TextureLoader().load(previewImage.src);
+            const material = new THREE.MeshStandardMaterial({ 
+                map: texture,
+                side: THREE.DoubleSide
+            });
+            
+            model = new THREE.Mesh(geometry, material);
+            scene.add(model);
+            
+            // Reset camera position
+            camera.position.z = 5;
+            controls.reset();
+        }
+
+        function toggleRotation() {
+            if (isRotating) {
+                clearInterval(rotationInterval);
+                rotateBtn.innerHTML = '<i class="fas fa-undo"></i> Rotate';
+            } else {
+                rotationInterval = setInterval(() => {
+                    model.rotation.y += 0.01;
+                }, 30);
+                rotateBtn.innerHTML = '<i class="fas fa-stop"></i> Stop';
+            }
+            isRotating = !isRotating;
+        }
+
+        function zoom3DModel(factor) {
+            currentScale *= factor;
+            model.scale.set(currentScale, currentScale, currentScale);
+        }
+
+        function reset3DModel() {
+            currentScale = 1;
+            model.scale.set(1, 1, 1);
+            camera.position.z = 5;
+            controls.reset();
+            if (isRotating) {
+                toggleRotation();
+            }
+        }
+    });
+</script>
 {% endblock %}

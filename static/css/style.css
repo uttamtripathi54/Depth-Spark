@@ -739,74 +739,330 @@ footer .container {
     text-align: left;
 }
 
-/* Responsive Design - Mobile Styles (Keep as is, but ensure it's complete) */
+/* Add this at the end of your existing style.css file */
+
+/* Mobile Responsiveness - Comprehensive Update */
+@media (max-width: 1024px) {
+    /* Tablet-sized adjustments */
+    .hero-text h1 {
+        font-size: 2.8em;
+    }
+    
+    .hero-text p {
+        font-size: 1.2em;
+    }
+    
+    .inverted-text h2, 
+    .conversion-text h2 {
+        font-size: 2.8em;
+    }
+    
+    .features .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    /* General adjustments */
     body {
-        padding-top: 100px;
+        padding-top: 80px;
     }
-
+    
     .container {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-
-    .header-content {
+    
+    /* Hero section */
+    .hero-section {
+        height: auto;
+        padding: 50px 0;
+    }
+    
+    .hero-section .container {
         flex-direction: column;
+        transform: none;
+    }
+    
+    .hero-text {
+        max-width: 100%;
+        padding: 0;
+        margin-bottom: 40px;
+        transform: none;
         text-align: center;
-        padding-left: 0;
-        padding-right: 0;
-        height: auto;
     }
-
-    header {
-        height: auto;
-        padding: 10px 0;
+    
+    .hero-text h1 {
+        font-size: 2.2em;
+        margin-bottom: 20px;
     }
+    
+    .hero-text p {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+    }
+    
+    .hero-image {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    /* Features section */
+    .features .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature {
+        min-height: 250px;
+    }
+    
+    /* Inverted and conversion sections */
+    .inverted-section,
+    .conversion-section {
+        height: auto;
+        padding: 60px 0;
+    }
+    
+    .inverted-content,
+    .conversion-content {
+        flex-direction: column;
+    }
+    
+    .inverted-content {
+        flex-direction: column-reverse;
+    }
+    
+    .inverted-image,
+    .conversion-image {
+        max-width: 100%;
+        padding: 0 !important;
+        margin-bottom: 30px;
+    }
+    
+    .inverted-text,
+    .conversion-text {
+        max-width: 100%;
+        padding: 0;
+        text-align: center;
+    }
+    
+    .inverted-text h2,
+    .conversion-text h2 {
+        font-size: 2.2em;
+        text-align: center;
+    }
+    
+    .inverted-text p,
+    .conversion-text p {
+        font-size: 1.1em;
+        text-align: left;
+    }
+    
+    /* How it works section */
+    .how-it-works {
+        padding: 60px 0;
+    }
+    
+    .step {
+        flex-direction: column;
+        padding: 20px;
+        padding-top: 70px;
+        margin-bottom: 40px;
+    }
+    
+    .step-gif {
+        position: relative;
+        left: auto;
+        top: auto;
+        margin-bottom: 20px;
+        max-width: 80px;
+    }
+    
+    .step-number {
+        left: 20px;
+        top: 20px;
+    }
+    
+    .how-it-works-steps::before {
+        display: none;
+    }
+    
+    /* FAQ section */
+    .faq {
+        padding: 60px 0;
+    }
+    
+    .faq-item summary {
+        padding: 20px;
+    }
+    
+    .faq-item p {
+        padding: 20px;
+    }
+    
+    .faq-item summary h3 {
+        font-size: 1.1em;
+        padding-left: 30px;
+    }
+}
 
+@media (max-width: 480px) {
+    /* Small mobile adjustments */
+    .hero-text h1 {
+        font-size: 1.8em;
+    }
+    
+    .button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    
+    .features h2,
+    .how-it-works h2,
+    .faq h2 {
+        font-size: 1.8em;
+    }
+    
+    .inverted-text h2,
+    .conversion-text h2 {
+        font-size: 1.8em;
+        text-align: left;
+    }
+    
+    /* Header adjustments */
     header h1 a {
-        margin-right: 0;
-        font-size: 1.6em;
-        line-height: normal;
-        vertical-align: baseline;
-        display: block;
-        margin-bottom: 8px;
-        transform: translateX(0%);
+        font-size: 0.7em;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide any overflowing text */
+        text-overflow: ellipsis; /* Display an ellipsis (...) to indicate hidden text */
+        max-width: 300px; /* Adjust as needed for your layout */
     }
-
-    nav {
-        text-align: center;
-        margin-left: 0;
-        margin-right: 0;
-        max-width: 90%;
-        height: auto;
-    }
-
-    nav ul {
-        display: block;
-        height: auto;
-    }
-
+    
     nav ul li {
-        display: block;
-        margin: 8px 0;
+        margin: 0 8px;
+    }
+    
+    .header-auth a {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+    
+    /* Step adjustments */
+    .step {
+        padding-left: 20px;
+        padding-top: 60px;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8em;
+        left: 15px;
+        top: 15px;
+    }
+}
+
+/* Additional responsive fixes for specific elements */
+@media (max-width: 768px) {
+    /* Ensure videos are responsive */
+    .inverted-image video {
+        width: 100%;
         height: auto;
     }
-
-    nav ul li a {
-        font-size: 1.0em;
-        line-height: normal;
-        vertical-align: baseline;
-        display: block;
-        padding: 8px 0;
+    
+    /* Adjust feature cards */
+    .feature-content {
+        font-size: 1em;
+        padding: 15px;
+        padding-top: 40px;
     }
+    
+    .feature-image-container h3 {
+        font-size: 1.5em;
+    }
+    
+    /* Center align all section headings */
+    .features h2,
+    .how-it-works h2,
+    .faq h2 {
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    
+    /* Adjust CTA section */
+    .cta-section h2 {
+        font-size: 1.8em;
+    }
+    
+    .cta-section p {
+        font-size: 1em;
+    }
+}
 
+/* Fix for mobile menu if needed */
+@media (max-width: 768px) {
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 5px 10px;
+    }
+    
     .header-auth {
         margin-top: 15px;
-        text-align: center;
-        margin-left: 0;
-        height: auto;
-        /* Add the rest of your mobile header-auth styles here if needed */
+        justify-content: center;
     }
-
-    /* Add other mobile responsive styles as needed */
+}
+/* 1. Reorder sections for mobile */
+@media (max-width: 768px) {
+    /* General inverted/conversion section adjustments */
+    .inverted-content, 
+    .conversion-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Specific section adjustments */
+    #showcase-3d-models .inverted-content,
+    .conversion-section .conversion-content {
+        flex-direction: column;
+    }
+    
+    /* Ensure all text content is left-aligned */
+    .inverted-text, 
+    .conversion-text {
+        text-align: left;
+        order: 2; /* Comes after image/video */
+        max-width: 100%;
+        padding: 0;
+        /*margin-top: 30px;*/
+    }
+    
+    /* Ensure images/videos come first */
+    .inverted-image, 
+    .conversion-image {
+        order: 1;
+        max-width: 100%;
+        padding: 0 !important;
+        margin-bottom: 0;
+    }
+    
+    /* Video specific adjustments */
+    .inverted-image video {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    /* Button alignment */
+    .inverted-text .button, 
+    .conversion-text .button {
+        display: block;
+        width: fit-content;
+        margin-left: 0;
+    }
 }

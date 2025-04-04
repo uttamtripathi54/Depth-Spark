@@ -5,37 +5,205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Depth Spark - Sign Up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="login-body"> <div class="login-container"> <div class="login-form-side"> <div class="login-header">
-                <h1><a href="/">Depth Spark</a></h1>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-form-side">
+            <div class="login-header">
+                <h1>
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Depth Spark Logo">
+                        <span>Depth Spark</span>
+                    </a>
+                </h1>
             </div>
             <div class="auth-switch">
                 <button class="auth-button" onclick="location.href='/login'">Sign In</button>
                 <button class="auth-button active">Sign Up</button>
             </div>
-            {{message}}
+            <div class="success-message" style="display: none;"></div> {{message}}
             <div class="login-form-container">
                 <p class="welcome-text">Create a new account to get started!</p>
-                <form class="login-form" method="POST">
+                <form class="login-form" method="POST" id="signupForm">
                     <div class="form-group">
-                        <input type="text" id="username" name="username" placeholder="Username" required>
+                        <div class="input-with-icon">
+                            <input type="text" id="username" name="username" placeholder="Username" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="error-message js-username-error" style="display: none;"></p>
+                        {% if username_error %}
+                        <p class="error-message">{{ username_error }}</p>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <div class="input-with-icon">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p class="error-message js-email-error" style="display: none;"></p>
+                        {% if email_error %}
+                        <p class="error-message">{{ email_error }}</p>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <div style="position: relative;">
+                            <div class="input-with-icon">
+                                <input type="password" id="password" name="password" placeholder="Password" required>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <span class="password-toggle">
+                                <i class="fa fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <div class="password-strength-indicator">
+                            <div class="strength-level" id="strengthLevel"></div>
+                            <p class="strength-text" id="strengthText">Weak</p>
+                        </div>
+                        <p class="error-message js-password-error" style="display: none;"></p>
+                        {% if password_error %}
+                        <p class="error-message">{{ password_error }}</p>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                        <div style="position: relative;">
+                            <div class="input-with-icon">
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <span class="password-toggle">
+                                <i class="fa fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <p class="error-message js-confirm-password-error" style="display: none;"></p>
+                        {% if confirm_password_error %}
+                        <p class="error-message">{{ confirm_password_error }}</p>
+                        {% endif %}
                     </div>
                     <button type="submit" class="button">Sign Up</button>
-                </form>
+                    <div class="loading-indicator" style="display: none;">Signing up...</div> </form>
                 <p class="signup-link">Already have an account? <a href="/login">Log In</a></p>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const usernameInput = document.getElementById('username');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            const usernameError = document.querySelector('.js-username-error');
+            const emailError = document.querySelector('.js-email-error');
+            const passwordError = document.querySelector('.js-password-error');
+            const confirmPasswordError = document.querySelector('.js-confirm-password-error');
+            const passwordToggles = document.querySelectorAll('.password-toggle');
+            const loadingIndicator = document.querySelector('.loading-indicator');
+            const successMessage = document.querySelector('.success-message');
+            const passwordStrengthIndicator = document.querySelector('.password-strength-indicator');
+            const strengthLevel = document.getElementById('strengthLevel');
+            const strengthText = document.getElementById('strengthText');
+
+            // Password Visibility Toggle for both password fields
+            passwordToggles.forEach(toggle => {
+                const inputField = toggle.previousElementSibling.querySelector('input');
+                const icon = toggle.querySelector('i');
+
+                toggle.addEventListener('click', function() {
+                    const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    inputField.setAttribute('type', type);
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+            });
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function checkPasswordStrength(password) {
+                // Basic password strength check (you can enhance this)
+                if (password.length < 6) {
+                    return 'Weak';
+                } else if (password.length < 10) {
+                    return 'Moderate';
+                } else {
+                    return 'Strong';
+                }
+            }
+
+            if (passwordInput && passwordStrengthIndicator) {
+                passwordInput.addEventListener('input', function() {
+                    const strength = checkPasswordStrength(passwordInput.value);
+                    strengthText.textContent = strength;
+                    strengthLevel.className = 'strength-level'; // Reset class
+                    strengthLevel.classList.add('strength-' + strength.toLowerCase());
+                    passwordStrengthIndicator.style.display = 'block';
+                });
+            }
+
+            // Client-Side Validation
+            signupForm.addEventListener('submit', function(event) {
+                let isValid = true;
+                usernameError.style.display = 'none';
+                emailError.style.display = 'none';
+                passwordError.style.display = 'none';
+                confirmPasswordError.style.display = 'none';
+
+                if (!usernameInput.value.trim()) {
+                    usernameError.textContent = 'Please enter a username.';
+                    usernameError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!emailInput.value.trim()) {
+                    emailError.textContent = 'Please enter your email address.';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value.trim())) {
+                    emailError.textContent = 'Please enter a valid email address.';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!passwordInput.value) {
+                    passwordError.textContent = 'Please enter a password.';
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters long.';
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!confirmPasswordInput.value) {
+                    confirmPasswordError.textContent = 'Please confirm your password.';
+                    confirmPasswordError.style.display = 'block';
+                    isValid = false;
+                } else if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match.';
+                    confirmPasswordError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    event.preventDefault(); // Prevent form submission if validation fails
+                } else {
+                    // Show loading indicator on successful client-side validation
+                    loadingIndicator.style.display = 'block';
+                    // In a real application, you would typically hide the button here
+                }
+                // In a real application, handle server response and show success/error messages
+                // For example, after a successful signup, you might do:
+                // successMessage.textContent = 'Account created successfully! Please check your email for verification.';
+                // successMessage.style.display = 'block';
+                // setTimeout(() => { window.location.href = '/login'; }, 1500); // Redirect after a delay
+            });
+        });
+    </script>
 </body>
 </html>
