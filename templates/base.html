@@ -14,7 +14,15 @@
     <header>
         <div class="header-content">
             <h1><a href="/">Depth Spark</a></h1>
-            <nav>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="nav-menu">
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/#features">Features</a></li>
@@ -22,6 +30,11 @@
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="/#faq">FAQ</a></li>
                     <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+                    <!-- Mobile Auth Buttons -->
+                    <li class="mobile-auth">
+                        <a href="/login" class="button">Sign In</a>
+                        <a href="/signup" class="button signup-button">Sign Up</a>
+                    </li>
                 </ul>
             </nav>
             <div class="header-auth">
@@ -38,6 +51,6 @@
     </footer>
 
     {% block js %}{% endblock %}
-    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

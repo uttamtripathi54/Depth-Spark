@@ -1,4 +1,5 @@
 /* style.css - UNIFIED HEADER AND FOOTER STYLES */
+
 /* Reset and General Styles (Keep as is) */
 /* * {
     margin: 0;
@@ -26,7 +27,7 @@ body {
     padding-right: 15px;
 }
 
-/* Unified Header Styles (From landing page style.css) */
+/* Unified Header Styles */
 header {
     background: linear-gradient(to bottom, #e0f7fa, #f0f9ff);
     border-bottom: 1px solid #cddde3;
@@ -34,7 +35,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 1000;
     height: 80px;
 }
 
@@ -42,9 +43,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 20px;
     height: 100%;
+    position: relative;
 }
 
 header h1 a {
@@ -55,30 +56,26 @@ header h1 a {
     letter-spacing: -0.04em;
     line-height: 1.2;
     display: block;
-    transform: translateX(5%);
+    z-index: 1001;
 }
 
-nav {
-    text-align: center;
-    height: 100%;
-    display: flex;
-    align-items: center;
+/* Navigation Styles */
+.nav-menu {
+    transition: all 0.3s ease;
 }
 
-nav ul {
+.nav-menu ul {
     list-style: none;
     display: flex;
-    height: auto;
     margin: 0;
     padding: 0;
 }
 
-nav ul li {
+.nav-menu ul li {
     margin: 0 12px;
-    display: list-item;
 }
 
-nav ul li a {
+.nav-menu ul li a {
     text-decoration: none;
     color: #777;
     font-weight: 500;
@@ -88,16 +85,16 @@ nav ul li a {
     display: block;
 }
 
-nav ul li a:hover {
+.nav-menu ul li a:hover {
     color: #00bcd4;
     text-decoration: underline;
 }
 
+/* Auth Buttons - Desktop */
 .header-auth {
-    height: 100%;
     display: flex;
     align-items: center;
-    transform: translateX(-5%);
+    z-index: 1001;
 }
 
 .header-auth a {
@@ -130,6 +127,159 @@ nav ul li a:hover {
     box-shadow: 0 3px 7px rgba(85, 139, 47, 0.3);
 }
 
+/* Mobile Auth Buttons */
+.mobile-auth {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+.mobile-auth a {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0 !important;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #00bcd4;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: linear-gradient(to bottom, #e0f7fa, #f0f9ff);
+        transition: all 0.3s ease;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .nav-menu ul li {
+        margin: 10px 0;
+        border-bottom: 1px solid rgba(0, 188, 212, 0.1); /* Added border for visual separation */
+    }
+
+    .nav-menu ul li:last-child {
+        border-bottom: none; /* Remove border from the last item */
+    }
+
+    .nav-menu ul li a {
+        padding: 15px; /* Increased padding for better touch area */
+        border-bottom: none; /* Remove individual link borders */
+    }
+
+    /* Hide desktop auth buttons */
+    .header-auth {
+        display: none;
+    }
+
+    /* Show mobile auth buttons */
+    .mobile-auth {
+        display: flex;
+    }
+
+    /* Style mobile auth buttons */
+    .nav-menu ul li.mobile-auth a {
+        display: inline-block; /* Changed to inline-block to apply button styles */
+        margin-left: 0 !important;
+        padding: 8px 14px !important; /* Apply same padding as desktop buttons */
+        text-align: center;
+        border-radius: 6px;
+        font-size: 0.95em;
+        line-height: 1.2;
+        box-shadow: 0 2px 5px rgba(0, 188, 212, 0.2);
+        white-space: nowrap;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-menu ul li.mobile-auth a:first-child { /* Style "Sign In" button */
+        color: #fff;
+        /*background-color: #00bcd4;*/
+        background: linear-gradient(to right, #00bcd4, #00bcd4);
+        box-shadow: 0 2px 5px rgba(124, 179, 66, 0.2);
+        width: 96%;
+    }
+
+    .nav-menu ul li.mobile-auth a:first-child:hover {
+        background-color: #00acc1;
+        box-shadow: 0 3px 7px rgba(0, 172, 193, 0.3);
+        text-decoration: none;
+    }
+
+    .nav-menu ul li.mobile-auth a.signup-button { /* Style "Sign Up" button */
+        background-color: #7cb342;
+        box-shadow: 0 2px 5px rgba(124, 179, 66, 0.2);
+        color: #fff;
+        width: 96%;
+    }
+
+    .nav-menu ul li.mobile-auth a.signup-button:hover {
+        background-color: #558b2f;
+        box-shadow: 0 3px 7px rgba(85, 139, 47, 0.3);
+        text-decoration: none;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 a {
+        font-size: 1.5em;
+    }
+
+    .nav-menu ul li.mobile-auth a {
+        padding: 10px !important;
+        font-size: 0.9em;
+    }
+}
+
+/* ALL EXISTING STYLES BELOW THIS POINT REMAIN UNCHANGED */
 /* Section Base Styles (Keep as is) */
 .section-base {
     width: 100%;
@@ -142,7 +292,7 @@ nav ul li a:hover {
     padding-right: 20px;
 }
 
-/* Hero Section Styles (Keep as is) */
+/* Hero Section Styles */
 .hero-section {
     width: 100%;
     height: calc(100vh - 80px);
@@ -173,6 +323,7 @@ nav ul li a:hover {
     margin-bottom: 25px;
     letter-spacing: -1.2px;
     line-height: 1.1;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-text p {
@@ -181,22 +332,30 @@ nav ul li a:hover {
     margin-bottom: 30px;
     line-height: 1.8;
     font-weight: 400;
+    animation: fadeInUp 1s ease-out;
 }
 
 .hero-image {
     flex: 1;
     max-width: 40.25%; /* INCREASED HERO IMAGE SIZE BY 15% */
+    animation: fadeInRight 0.8s ease-out;
 }
 
-.hero-image img, .inverted-image img, .conversion-image img, .about-image img { /* Unified image styles */
+.hero-image img,
+.inverted-image img,
+.conversion-image img,
+.about-image img { /* Unified image styles */
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.3s ease;
 }
 
-.hero-image img:hover, .inverted-image img:hover, .conversion-image img:hover, .about-image img:hover { /* Unified image hover styles */
+.hero-image img:hover,
+.inverted-image img:hover,
+.conversion-image img:hover,
+.about-image img:hover { /* Unified image hover styles */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -221,11 +380,35 @@ nav ul li a:hover {
     transform: translateY(-1px);
 }
 
-/* Features Section Styles (Enhanced Appeal) */
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Features Section Styles */
 .features {
     background-color: #f9f9f9;
     margin-top: 0;
     padding: 35px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.features::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, #f0f9ff);
+    z-index: 0;
 }
 
 .features .container {
@@ -283,6 +466,16 @@ nav ul li a:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
 }
 
+.feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #00bcd4, #7cb342);
+}
+
 .feature-image-container {
     position: relative; /* For overlaying the title */
     width: 100%;
@@ -296,6 +489,11 @@ nav ul li a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensure the image covers the container */
+    transition: transform 0.5s ease;
+}
+
+.feature:hover .feature-image-container img {
+    transform: scale(1.05);
 }
 
 .feature-image-container h3 {
@@ -309,6 +507,11 @@ nav ul li a:hover {
     margin: 0;
     padding: 10px; /* Add some padding around the title */
     border-radius: 5px; /* Optional: Add border-radius to the title background */
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .reveal-icon {
@@ -342,7 +545,6 @@ nav ul li a:hover {
     color: #fff; /* Changed text color to white for visibility on blurred image */
     line-height: 1.7;
     font-weight: 400;
-    /* REMOVE THIS LINE: background-color: rgba(255, 255, 255, 0.9); */
     clip-path: circle(0px at calc(100% - 20px) 20px);
     transition: clip-path 0.4s ease-in-out;
     border-radius: 15px; /* Match card border-radius */
@@ -357,7 +559,7 @@ nav ul li a:hover {
     clip-path: circle(150% at calc(100% - 20px) 20px); /* Expand the circle to cover the card */
 }
 
-/* How It Works Section Styles (Adjusted GIF Positioning) */
+/* How It Works Section Styles */
 .how-it-works {
     background: #f9f9f9;
     padding: 80px 0;
@@ -380,7 +582,6 @@ nav ul li a:hover {
     background: linear-gradient(to right, #00bcd4, #7cb342);
     -webkit-background-clip: text;
     color: transparent;
-    display: inline-block;
     padding-bottom: 5px;
 }
 
@@ -403,6 +604,16 @@ nav ul li a:hover {
     position: relative;
 }
 
+.how-it-works-steps::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 44px;
+    border-left: 2px solid #00bcd4;
+    z-index: 0;
+}
+
 .step {
     display: flex;
     align-items: flex-start;
@@ -414,6 +625,10 @@ nav ul li a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
     padding-left: 140px; /* Increased left padding to accommodate GIF */
+}
+
+.step:last-child::before {
+    display: none;
 }
 
 .step-number {
@@ -460,22 +675,7 @@ nav ul li a:hover {
     margin-bottom: 0;
 }
 
-/* Enhanced Vertical Flow Line */
-.how-it-works-steps::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 44px;
-    border-left: 2px solid #00bcd4;
-    z-index: 0;
-}
-
-.step:last-child::before {
-    display: none;
-}
-
-/* FAQ Section Styles (Even More Attractive - Plus/Minus Restored - Title Centered) */
+/* FAQ Section Styles */
 .faq {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAQAAADcywk3AAAAHElEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=') repeat, linear-gradient(to bottom, #f7faff, #ffffff);
     padding: 75px 0;
@@ -604,7 +804,7 @@ nav ul li a:hover {
     box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.4);
 }
 
-/* CTA Section Styles (Keep as is) */
+/* CTA Section Styles */
 .cta-section {
     background: linear-gradient(to right, #00bcd4, #00acc1);
     color: #fff;
@@ -631,7 +831,7 @@ nav ul li a:hover {
     text-align: center; /* Add this line to center the paragraph text */
 }
 
-/* Unified Footer Styles (From contact_us.css) */
+/* Unified Footer Styles */
 footer {
     background: linear-gradient(to bottom, #264d4d, #1a3333);
     color: #ddd;
@@ -655,8 +855,9 @@ footer .container {
     padding-right: 15px;
 }
 
-/* Inverted Section Styles (Keep as is) */
-.inverted-section, .conversion-section { /* Combined styles for visual consistency */
+/* Inverted Section Styles */
+.inverted-section,
+.conversion-section { /* Combined styles for visual consistency */
     width: 100%;
     height: 100vh;
     padding: 0;
@@ -676,7 +877,8 @@ footer .container {
     background-color: #f0f2f5; /* Background for Fast 3D Image Conversion section */
 }
 
-.inverted-container, .conversion-container { /* Combined container styles */
+.inverted-container,
+.conversion-container { /* Combined container styles */
     max-width: 1300px;
     margin: 0 auto;
     padding-left: 20px;
@@ -686,7 +888,8 @@ footer .container {
     box-sizing: border-box;
 }
 
-.inverted-content, .conversion-content { /* Combined content styles - EXCEPT flex-direction */
+.inverted-content,
+.conversion-content { /* Combined content styles - EXCEPT flex-direction */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -703,7 +906,8 @@ footer .container {
     flex-direction: row; /* Text left, Image right - INVERSED NOW */ /* Changed to row, as per user request to inverse content */
 }
 
-.inverted-image, .conversion-image { /* Combined image container styles */
+.inverted-image,
+.conversion-image { /* Combined image container styles */
     flex: 1.2; /* Unified flex value */
     max-width: 60%; /* Unified max-width value */
 }
@@ -716,14 +920,16 @@ footer .container {
     padding-left: 30px; /* Left padding for image in Fast 3D Image Conversion section */
 }
 
-.inverted-text, .conversion-text { /* Combined text container styles */
+.inverted-text,
+.conversion-text { /* Combined text container styles */
     flex: 1.5;
     max-width: 50%;
     padding-left: 20px; /* Left padding unified, as text is generally on the left now */
     padding-right: 0; /* Removed right padding, can add back if text is on the right again */
 }
 
-.inverted-text h2, .conversion-text h2 { /* Combined headline styles */
+.inverted-text h2,
+.conversion-text h2 { /* Combined headline styles */
     font-size: 3.5em;
     color: #333;
     margin-bottom: 25px;
@@ -731,7 +937,8 @@ footer .container {
     text-align: left;
 }
 
-.inverted-text p, .conversion-text p { /* Combined paragraph styles */
+.inverted-text p,
+.conversion-text p { /* Combined paragraph styles */
     font-size: 1.4em;
     color: #777;
     line-height: 1.8;
@@ -739,24 +946,53 @@ footer .container {
     text-align: left;
 }
 
-/* Add this at the end of your existing style.css file */
-
 /* Mobile Responsiveness - Comprehensive Update */
+@media (max-width: 768px) {
+    /* Hero Section */
+    .hero-section .container {
+        flex-direction: column;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        padding: 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .hero-image img {
+        transform: none;
+    }
+
+    /* Features */
+    .features .container {
+        grid-template-columns: 1fr;
+    }
+
+    .feature {
+        margin-bottom: 30px;
+    }
+}
+
 @media (max-width: 1024px) {
     /* Tablet-sized adjustments */
     .hero-text h1 {
         font-size: 2.8em;
     }
-    
+
     .hero-text p {
         font-size: 1.2em;
     }
-    
-    .inverted-text h2, 
+
+    .inverted-text h2,
     .conversion-text h2 {
         font-size: 2.8em;
     }
-    
+
     .features .container {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -767,23 +1003,24 @@ footer .container {
     body {
         padding-top: 80px;
     }
-    
+
     .container {
         padding-left: 15px;
         padding-right: 15px;
+        /*padding-bottom: 50px;*/
     }
-    
+
     /* Hero section */
     .hero-section {
         height: auto;
         padding: 50px 0;
     }
-    
+
     .hero-section .container {
         flex-direction: column;
         transform: none;
     }
-    
+
     .hero-text {
         max-width: 100%;
         padding: 0;
@@ -791,86 +1028,86 @@ footer .container {
         transform: none;
         text-align: center;
     }
-    
+
     .hero-text h1 {
         font-size: 2.2em;
         margin-bottom: 20px;
     }
-    
+
     .hero-text p {
         font-size: 1.1em;
         margin-bottom: 25px;
     }
-    
+
     .hero-image {
         max-width: 100%;
         margin: 0 auto;
     }
-    
+
     /* Features section */
     .features .container {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .feature {
         min-height: 250px;
     }
-    
+
     /* Inverted and conversion sections */
     .inverted-section,
     .conversion-section {
         height: auto;
-        padding: 60px 0;
+        /*padding: 60px 0;*/
     }
-    
+
     .inverted-content,
     .conversion-content {
         flex-direction: column;
     }
-    
+
     .inverted-content {
         flex-direction: column-reverse;
     }
-    
+
     .inverted-image,
     .conversion-image {
         max-width: 100%;
         padding: 0 !important;
         margin-bottom: 30px;
     }
-    
+
     .inverted-text,
     .conversion-text {
         max-width: 100%;
         padding: 0;
         text-align: center;
     }
-    
+
     .inverted-text h2,
     .conversion-text h2 {
         font-size: 2.2em;
         text-align: center;
     }
-    
+
     .inverted-text p,
     .conversion-text p {
         font-size: 1.1em;
         text-align: left;
     }
-    
+
     /* How it works section */
     .how-it-works {
         padding: 60px 0;
     }
-    
+
     .step {
         flex-direction: column;
         padding: 20px;
         padding-top: 70px;
         margin-bottom: 40px;
     }
-    
+
     .step-gif {
         position: relative;
         left: auto;
@@ -878,29 +1115,29 @@ footer .container {
         margin-bottom: 20px;
         max-width: 80px;
     }
-    
+
     .step-number {
         left: 20px;
         top: 20px;
     }
-    
+
     .how-it-works-steps::before {
         display: none;
     }
-    
+
     /* FAQ section */
     .faq {
-        padding: 60px 0;
+        padding: 10px 0;
     }
-    
+
     .faq-item summary {
         padding: 20px;
     }
-    
+
     .faq-item p {
         padding: 20px;
     }
-    
+
     .faq-item summary h3 {
         font-size: 1.1em;
         padding-left: 30px;
@@ -912,48 +1149,48 @@ footer .container {
     .hero-text h1 {
         font-size: 1.8em;
     }
-    
+
     .button {
         padding: 12px 20px;
         font-size: 1em;
     }
-    
+
     .features h2,
     .how-it-works h2,
     .faq h2 {
         font-size: 1.8em;
     }
-    
+
     .inverted-text h2,
     .conversion-text h2 {
         font-size: 1.8em;
         text-align: left;
     }
-    
+
     /* Header adjustments */
     header h1 a {
-        font-size: 0.7em;
+        font-size: 1em;
         white-space: nowrap; /* Prevent text from wrapping */
         overflow: hidden; /* Hide any overflowing text */
         text-overflow: ellipsis; /* Display an ellipsis (...) to indicate hidden text */
         max-width: 300px; /* Adjust as needed for your layout */
     }
-    
+
     nav ul li {
         margin: 0 8px;
     }
-    
+
     .header-auth a {
         padding: 6px 10px;
         font-size: 0.85em;
     }
-    
+
     /* Step adjustments */
     .step {
         padding-left: 20px;
         padding-top: 60px;
     }
-    
+
     .step-number {
         width: 40px;
         height: 40px;
@@ -970,18 +1207,18 @@ footer .container {
         width: 100%;
         height: auto;
     }
-    
+
     /* Adjust feature cards */
     .feature-content {
         font-size: 1em;
         padding: 15px;
         padding-top: 40px;
     }
-    
+
     .feature-image-container h3 {
         font-size: 1.5em;
     }
-    
+
     /* Center align all section headings */
     .features h2,
     .how-it-works h2,
@@ -990,12 +1227,12 @@ footer .container {
         display: block;
         width: 100%;
     }
-    
+
     /* Adjust CTA section */
     .cta-section h2 {
         font-size: 1.8em;
     }
-    
+
     .cta-section p {
         font-size: 1em;
     }
@@ -1007,33 +1244,34 @@ footer .container {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     nav ul li {
         margin: 5px 10px;
     }
-    
+
     .header-auth {
         margin-top: 15px;
         justify-content: center;
     }
 }
+
 /* 1. Reorder sections for mobile */
 @media (max-width: 768px) {
     /* General inverted/conversion section adjustments */
-    .inverted-content, 
+    .inverted-content,
     .conversion-content {
         display: flex;
         flex-direction: column;
     }
-    
+
     /* Specific section adjustments */
     #showcase-3d-models .inverted-content,
     .conversion-section .conversion-content {
         flex-direction: column;
     }
-    
+
     /* Ensure all text content is left-aligned */
-    .inverted-text, 
+    .inverted-text,
     .conversion-text {
         text-align: left;
         order: 2; /* Comes after image/video */
@@ -1041,25 +1279,25 @@ footer .container {
         padding: 0;
         /*margin-top: 30px;*/
     }
-    
+
     /* Ensure images/videos come first */
-    .inverted-image, 
+    .inverted-image,
     .conversion-image {
         order: 1;
         max-width: 100%;
         padding: 0 !important;
         margin-bottom: 0;
     }
-    
+
     /* Video specific adjustments */
     .inverted-image video {
         width: 100%;
         height: auto;
         margin-bottom: 20px;
     }
-    
+
     /* Button alignment */
-    .inverted-text .button, 
+    .inverted-text .button,
     .conversion-text .button {
         display: block;
         width: fit-content;
