@@ -6,8 +6,8 @@
     <title>Depth Spark - Sign In</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="login-body">
     <div class="login-container">
@@ -26,11 +26,11 @@
             </div>
             <div class="success-message" style="display: none;"></div> {{message}}
             <div class="login-form-container">
-                <p class="welcome-text">Welcome back! Please login to your account.</p>
+                <p class="welcome-text">Welcome back! Sign in to your account.</p>
                 <form class="login-form" method="POST" id="loginForm">
                     <div class="form-group">
                         <div class="input-with-icon">
-                            <input type="text" id="email" name="email" placeholder="Username or Email" required>
+                            <input type="text" id="email" name="email" placeholder="Username or Email" maxlength="50" required>
                             <i class="fas fa-user"></i>
                         </div>
                         <p class="error-message js-email-error" style="display: none;"></p>
@@ -55,12 +55,16 @@
                     </div>
                     <div class="form-options">
                         <label class="remember-me">
-                            <input type="checkbox" name="remember_me"> Remember me
+                            <input type="checkbox" name="remember_me">
+                            <span>Remember me</span>
                         </label>
                         <a href="#" class="forgot-password">Forgot password?</a>
                     </div>
                     <button type="submit" class="button">Log In</button>
-                    <div class="loading-indicator" style="display: none;">Logging in...</div> </form>
+                    <div class="loading-indicator" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Logging in...
+                    </div>
+                </form>
                 <p class="signup-link">Don't have an account? <a href="/signup">Sign Up</a></p>
             </div>
         </div>
@@ -90,6 +94,13 @@
                 });
             }
 
+            // Auto-move to next field
+            emailInput.addEventListener('input', function() {
+                if (emailInput.value.length >= 5) { // Arbitrary length to trigger focus
+                    passwordInput.focus();
+                }
+            });
+
             // Client-Side Validation
             loginForm.addEventListener('submit', function(event) {
                 let isValid = true;
@@ -109,19 +120,12 @@
                 }
 
                 if (!isValid) {
-                    event.preventDefault(); // Prevent form submission if validation fails
+                    event.preventDefault();
                 } else {
-                    // Show loading indicator on successful client-side validation
-                    loadingIndicator.style.display = 'block';
-                    // In a real application, you would typically hide the button here
+                    loadingIndicator.style.display = 'flex';
                 }
-                // In a real application, handle server response and show success/error messages
-                // For example, after a successful login, you might do:
-                // successMessage.textContent = 'Logged in successfully!';
-                // successMessage.style.display = 'block';
-                // setTimeout(() => { window.location.href = '/dashboard'; }, 1500); // Redirect after a delay
             });
         });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92f4687a2a9e458f',t:'MTc0NDQ3ODU3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

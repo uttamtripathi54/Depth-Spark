@@ -510,7 +510,7 @@ header h1 a {
     background: linear-gradient(to right, white, rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    /*color: transparent;*/
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -1210,7 +1210,7 @@ footer .container {
 
     /* Adjust feature cards */
     .feature-content {
-        font-size: 1em;
+        font-size: 1.2em;
         padding: 15px;
         padding-top: 40px;
     }

@@ -6,8 +6,8 @@
     <title>Depth Spark - Sign Up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="login-body">
     <div class="login-container">
@@ -26,11 +26,11 @@
             </div>
             <div class="success-message" style="display: none;"></div> {{message}}
             <div class="login-form-container">
-                <p class="welcome-text">Create a new account to get started!</p>
+                <p class="welcome-text">Create your account to get started!</p>
                 <form class="login-form" method="POST" id="signupForm">
                     <div class="form-group">
                         <div class="input-with-icon">
-                            <input type="text" id="username" name="username" placeholder="Username" required>
+                            <input type="text" id="username" name="username" placeholder="Username" maxlength="20" required>
                             <i class="fas fa-user"></i>
                         </div>
                         <p class="error-message js-username-error" style="display: none;"></p>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <div class="input-with-icon">
-                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <input type="email" id="email" name="email" placeholder="Email" maxlength="50" required>
                             <i class="fas fa-envelope"></i>
                         </div>
                         <p class="error-message js-email-error" style="display: none;"></p>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="password-strength-indicator">
                             <div class="strength-level" id="strengthLevel"></div>
-                            <p class="strength-text" id="strengthText">Weak</p>
+                            <p class="strength-text" id="strengthText">Enter a password</p>
                         </div>
                         <p class="error-message js-password-error" style="display: none;"></p>
                         {% if password_error %}
@@ -83,8 +83,11 @@
                         {% endif %}
                     </div>
                     <button type="submit" class="button">Sign Up</button>
-                    <div class="loading-indicator" style="display: none;">Signing up...</div> </form>
-                <p class="signup-link">Already have an account? <a href="/login">Log In</a></p>
+                    <div class="loading-indicator" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Signing up...
+                    </div>
+                </form>
+                <p class="signup-link">Already have an account? <a href="/login">Sign In</a></p>
             </div>
         </div>
     </div>
@@ -107,11 +110,10 @@
             const strengthLevel = document.getElementById('strengthLevel');
             const strengthText = document.getElementById('strengthText');
 
-            // Password Visibility Toggle for both password fields
+            // Password Visibility Toggle
             passwordToggles.forEach(toggle => {
                 const inputField = toggle.previousElementSibling.querySelector('input');
                 const icon = toggle.querySelector('i');
-
                 toggle.addEventListener('click', function() {
                     const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
                     inputField.setAttribute('type', type);
@@ -120,28 +122,49 @@
                 });
             });
 
+            // Auto-move to next field
+            usernameInput.addEventListener('input', function() {
+                if (usernameInput.value.length >= 3) {
+                    emailInput.focus();
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                if (emailInput.value.length >= 5 && emailInput.value.includes('@')) {
+                    passwordInput.focus();
+                }
+            });
+
+            passwordInput.addEventListener('input', function() {
+                if (passwordInput.value.length >= 6) {
+                    confirmPasswordInput.focus();
+                }
+            });
+
             function isValidEmail(email) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return emailRegex.test(email);
             }
 
             function checkPasswordStrength(password) {
-                // Basic password strength check (you can enhance this)
-                if (password.length < 6) {
-                    return 'Weak';
-                } else if (password.length < 10) {
-                    return 'Moderate';
-                } else {
-                    return 'Strong';
-                }
+                let strength = 0;
+                if (password.length >= 6) strength++;
+                if (password.length >= 10) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+                if (password.length === 0) return { text: 'Enter a password', class: '' };
+                if (strength <= 2) return { text: 'Weak', class: 'strength-weak' };
+                if (strength <= 4) return { text: 'Moderate', class: 'strength-moderate' };
+                return { text: 'Strong', class: 'strength-strong' };
             }
 
             if (passwordInput && passwordStrengthIndicator) {
                 passwordInput.addEventListener('input', function() {
-                    const strength = checkPasswordStrength(passwordInput.value);
-                    strengthText.textContent = strength;
-                    strengthLevel.className = 'strength-level'; // Reset class
-                    strengthLevel.classList.add('strength-' + strength.toLowerCase());
+                    const { text, class: strengthClass } = checkPasswordStrength(passwordInput.value);
+                    strengthText.textContent = text;
+                    strengthLevel.className = 'strength-level ' + strengthClass;
                     passwordStrengthIndicator.style.display = 'block';
                 });
             }
@@ -191,19 +214,12 @@
                 }
 
                 if (!isValid) {
-                    event.preventDefault(); // Prevent form submission if validation fails
+                    event.preventDefault();
                 } else {
-                    // Show loading indicator on successful client-side validation
-                    loadingIndicator.style.display = 'block';
-                    // In a real application, you would typically hide the button here
+                    loadingIndicator.style.display = 'flex';
                 }
-                // In a real application, handle server response and show success/error messages
-                // For example, after a successful signup, you might do:
-                // successMessage.textContent = 'Account created successfully! Please check your email for verification.';
-                // successMessage.style.display = 'block';
-                // setTimeout(() => { window.location.href = '/login'; }, 1500); // Redirect after a delay
             });
         });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92f4687a1ca0bf81',t:'MTc0NDQ3ODU3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
