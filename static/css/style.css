@@ -18,6 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 0; /* Ensure no bottom margin on body */
+    margin: 0; /* Reset margin to 0 for body */
 }
 
 .container {
@@ -715,6 +716,8 @@ header h1 a {
 
 .faq-list {
     margin-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .faq-item {

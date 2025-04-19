@@ -966,7 +966,7 @@
             <div class="preview-box" id="interactiveResult" style="display: none;">
                 <h3>Interactive 3D Model</h3>
                 <div class="model-viewer-container">
-                    <canvas id="interactiveModel"></canvas>
+                    <model-viewer id="interactiveModel" src="" camera-controls auto-rotate ar shadow-intensity="1"></model-viewer>
                 </div>
                 <div class="viewer-controls">
                     <button class="control-btn" id="rotateBtn">
@@ -990,11 +990,11 @@
     </div>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/1.10.0/model-viewer.min.js"></script>
 {% endblock %}
 
 {% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // DOM Elements
@@ -1023,7 +1023,7 @@
         const downloadStaticBtn = document.getElementById('downloadStaticBtn');
         
         const interactiveResult = document.getElementById('interactiveResult');
-        const modelCanvas = document.getElementById('interactiveModel');
+        const modelViewer = document.getElementById('interactiveModel');
         const rotateBtn = document.getElementById('rotateBtn');
         const zoomIn3DBtn = document.getElementById('zoomIn3DBtn');
         const zoomOut3DBtn = document.getElementById('zoomOut3DBtn');
@@ -1040,10 +1040,57 @@
         let isPlaying = true;
         let staticZoomLevel = 1;
         
-        let scene, camera, renderer, model, controls;
         let isRotating = false;
-        let rotationInterval;
         let currentScale = 1;
+
+        // Anime.js Animations
+        // Header Animation
+        anime.timeline({
+            easing: 'easeOutExpo'
+        })
+        .add({
+            targets: '.convert-header h1',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            duration: 800,
+            delay: 200
+        })
+        .add({
+            targets: '.convert-header p',
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 800
+        }, '-=400');
+
+        // Input Section Animation
+        anime({
+            targets: '.input-section',
+            opacity: [0, 1],
+            scale: [0.95, 1],
+            duration: 1000,
+            easing: 'easeOutCubic',
+            delay: 600
+        });
+
+        // Options Section Animation
+        anime({
+            targets: '.option-card',
+            opacity: [0, 1],
+            translateY: [40, 0],
+            duration: 800,
+            easing: 'easeOutCubic',
+            delay: anime.stagger(200, {start: 800})
+        });
+
+        // Convert Button Pulse Animation
+        anime({
+            targets: '.convert-btn',
+            scale: [1, 1.05, 1],
+            duration: 1200,
+            easing: 'easeInOutQuad',
+            loop: true,
+            delay: 1000
+        });
 
         // Event Listeners
         urlSubmitBtn.addEventListener('click', loadImageFromUrl);
@@ -1096,6 +1143,14 @@
                 };
                 previewImage.src = url;
                 previewContainer.style.display = 'block';
+                // Animate Preview Container
+                anime({
+                    targets: '#previewContainer',
+                    opacity: [0, 1],
+                    translateY: [40, 0],
+                    duration: 800,
+                    easing: 'easeOutCubic'
+                });
                 urlSubmitBtn.disabled = false;
                 urlSubmitBtn.innerHTML = '<i class="fas fa-link"></i> Load URL';
                 updateConvertButton();
@@ -1119,6 +1174,14 @@
             reader.onload = (e) => {
                 previewImage.src = e.target.result;
                 previewContainer.style.display = 'block';
+                // Animate Preview Container
+                anime({
+                    targets: '#previewContainer',
+                    opacity: [0, 1],
+                    translateY: [40, 0],
+                    duration: 800,
+                    easing: 'easeOutCubic'
+                });
                 updateConvertButton();
             };
             reader.readAsDataURL(file);
@@ -1133,6 +1196,15 @@
                 motionEffectsSection.classList.add('active');
                 selectedMotionEffect = null;
                 motionEffectCards.forEach(card => card.classList.remove('selected'));
+                // Animate Motion Effects Section
+                anime({
+                    targets: '.motion-effect-card',
+                    opacity: [0, 1],
+                    scale: [0.9, 1],
+                    duration: 600,
+                    easing: 'easeOutCubic',
+                    delay: anime.stagger(100)
+                });
             } else {
                 motionEffectsSection.classList.remove('active');
                 selectedMotionEffect = null;
@@ -1191,6 +1263,15 @@
                     break;
             }
             resultContainer.style.display = 'block';
+            // Animate Result Container
+            anime({
+                targets: '.preview-box',
+                opacity: [0, 1],
+                translateY: [40, 0],
+                duration: 800,
+                easing: 'easeOutCubic',
+                delay: anime.stagger(200)
+            });
             resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -1215,13 +1296,10 @@
 
         function showInteractiveResult() {
             interactiveResult.style.display = 'block';
-            if (!renderer) init3DViewer();
-            createDemoModel();
-            downloadModelBtn.href = "#";
-            downloadModelBtn.onclick = function() {
-                alert('In a real application, this would download the 3D model file');
-                return false;
-            };
+            modelViewer.src = "{{ url_for('static', filename='models/sample_model.glb') }}";
+            modelViewer.alt = "Interactive 3D Model";
+            downloadModelBtn.href = modelViewer.src;
+            downloadModelBtn.download = `3d_model_${selectedFile.name.replace(/\.[^/.]+$/, "") || 'model'}.glb`;
         }
 
         function togglePlayPause() {
@@ -1254,72 +1332,25 @@
             staticImage.style.transform = `scale(${staticZoomLevel})`;
         }
 
-        function init3DViewer() {
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xf0f0f0);
-            camera = new THREE.PerspectiveCamera(75, modelCanvas.offsetWidth / modelCanvas.offsetHeight, 0.1, 1000);
-            camera.position.z = 5;
-            renderer = new THREE.WebGLRenderer({ canvas: modelCanvas, antialias: true });
-            renderer.setSize(modelCanvas.offsetWidth, modelCanvas.offsetHeight);
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.25;
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
-            function animate() {
-                requestAnimationFrame(animate);
-                controls.update();
-                renderer.render(scene, camera);
-            }
-            animate();
-            window.addEventListener('resize', () => {
-                camera.aspect = modelCanvas.offsetWidth / modelCanvas.offsetHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(modelCanvas.offsetWidth, modelCanvas.offsetHeight);
-            });
-        }
-
-        function createDemoModel() {
-            if (model) scene.remove(model);
-            const geometry = new THREE.PlaneGeometry(4, 4);
-            const texture = new THREE.TextureLoader().load(previewImage.src);
-            const material = new THREE.MeshStandardMaterial({ 
-                map: texture,
-                side: THREE.DoubleSide
-            });
-            model = new THREE.Mesh(geometry, material);
-            scene.add(model);
-            camera.position.z = 5;
-            controls.reset();
-        }
-
         function toggleRotation() {
-            if (isRotating) {
-                clearInterval(rotationInterval);
-                rotateBtn.innerHTML = '<i class="fas fa-undo"></i> Rotate';
-            } else {
-                rotationInterval = setInterval(() => {
-                    model.rotation.y += 0.01;
-                }, 30);
-                rotateBtn.innerHTML = '<i class="fas fa-stop"></i> Stop';
-            }
             isRotating = !isRotating;
+            modelViewer.autoRotate = isRotating;
+            rotateBtn.innerHTML = isRotating ? '<i class="fas fa-stop"></i> Stop' : '<i class="fas fa-undo"></i> Rotate';
         }
 
         function zoom3DModel(factor) {
             currentScale *= factor;
-            model.scale.set(currentScale, currentScale, currentScale);
+            const fov = modelViewer.getFieldOfView();
+            modelViewer.setFieldOfView(fov / factor);
         }
 
         function reset3DModel() {
             currentScale = 1;
-            model.scale.set(1, 1, 1);
-            camera.position.z = 5;
-            controls.reset();
-            if (isRotating) toggleRotation();
+            modelViewer.resetTurntableRotation();
+            modelViewer.setFieldOfView(45);
+            if (isRotating) {
+                toggleRotation();
+            }
         }
     });
 </script>

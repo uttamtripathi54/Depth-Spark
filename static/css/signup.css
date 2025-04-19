@@ -303,16 +303,21 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+
     .login-body {
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .login-container {
         padding: 30px;
         max-width: 95%;
         margin-right: 0;
+        max-height: calc(100vh - 40px);
     }
 
     .login-header h1 a {
