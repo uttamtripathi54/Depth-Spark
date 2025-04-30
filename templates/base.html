@@ -32,14 +32,30 @@
                     <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
                     <!-- Mobile Auth Buttons -->
                     <li class="mobile-auth">
-                        <a href="/login" class="button">Sign In</a>
-                        <a href="/signup" class="button signup-button">Sign Up</a>
+                        {% if session.user %}
+                            <div class="username-container">
+                                <i class="fas fa-user"></i>
+                                <span class="username">{{ session.user }}</span>
+                            </div>
+                            <a href="{{ url_for('logout') }}" class="button logout-button">Logout</a>
+                        {% else %}
+                            <a href="/login" class="button">Sign In</a>
+                            <a href="/signup" class="button signup-button">Sign Up</a>
+                        {% endif %}
                     </li>
                 </ul>
             </nav>
             <div class="header-auth">
-                <a href="/login">Sign In</a>
-                <a href="/signup" class="button signup-button">Sign Up</a>
+                {% if session.user %}
+                    <div class="username-container">
+                        <i class="fas fa-user"></i>
+                        <span class="username">{{ session.user }}</span>
+                    </div>
+                    <a href="{{ url_for('logout') }}" class="button logout-button">Logout</a>
+                {% else %}
+                    <a href="/login">Sign In</a>
+                    <a href="/signup" class="button signup-button">Sign Up</a>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -47,10 +63,10 @@
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; 2025 Depth Spark</p>
+        <p>© 2025 Depth Spark</p>
     </footer>
 
     {% block js %}{% endblock %}
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934c975d2ed953b6',t:'MTc0NTQwMzIzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

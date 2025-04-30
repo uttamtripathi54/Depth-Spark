@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         this.setAttribute('aria-expanded', !isExpanded);
     });
     
-    // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    // Close menu when clicking on a link or logout button
+    const navLinks = document.querySelectorAll('.nav-menu a, .nav-menu .logout-button');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             hamburger.classList.remove('active');

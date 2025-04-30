@@ -165,16 +165,41 @@ header h1 a {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+    /* Header adjustments for mobile */
+    header {
+        height: 60px; /* Reduced from 80px */
+        padding: 5px 0; /* Reduced padding */
+    }
+
+    .header-content {
+        padding: 0 15px; /* Reduced padding */
+    }
+
+    .nav-menu {
+        top: 60px; /* Adjusted to match new header height */
+        height: calc(100vh - 60px); /* Adjusted to match new header height */
+    }
+
+    .hamburger {
+        padding: 8px; /* Reduced padding */
+    }
+
+    /* Footer adjustments for mobile */
+    footer {
+        padding: 15px 0; /* Reduced from 20px */
+        font-size: 0.9em; /* Slightly smaller text */
+    }
+
     .hamburger {
         display: block;
     }
 
     .nav-menu {
         position: fixed;
-        top: 80px;
+        top: 60px; /* Adjusted to match new header height */
         left: -100%;
         width: 100%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 60px); /* Adjusted to match new header height */
         background: linear-gradient(to bottom, #e0f7fa, #f0f9ff);
         transition: all 0.3s ease;
         overflow-y: auto;
@@ -192,16 +217,15 @@ header h1 a {
 
     .nav-menu ul li {
         margin: 10px 0;
-        border-bottom: 1px solid rgba(0, 188, 212, 0.1); /* Added border for visual separation */
+        border-bottom: 1px solid rgba(0, 188, 212, 0.1);
     }
 
     .nav-menu ul li:last-child {
-        border-bottom: none; /* Remove border from the last item */
+        border-bottom: none;
     }
 
     .nav-menu ul li a {
-        padding: 15px; /* Increased padding for better touch area */
-        border-bottom: none; /* Remove individual link borders */
+        padding: 15px;
     }
 
     /* Hide desktop auth buttons */
@@ -216,9 +240,9 @@ header h1 a {
 
     /* Style mobile auth buttons */
     .nav-menu ul li.mobile-auth a {
-        display: inline-block; /* Changed to inline-block to apply button styles */
+        display: inline-block;
         margin-left: 0 !important;
-        padding: 8px 14px !important; /* Apply same padding as desktop buttons */
+        padding: 8px 14px !important;
         text-align: center;
         border-radius: 6px;
         font-size: 0.95em;
@@ -228,9 +252,8 @@ header h1 a {
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .nav-menu ul li.mobile-auth a:first-child { /* Style "Sign In" button */
+    .nav-menu ul li.mobile-auth a:first-child {
         color: #fff;
-        /*background-color: #00bcd4;*/
         background: linear-gradient(to right, #00bcd4, #00bcd4);
         box-shadow: 0 2px 5px rgba(124, 179, 66, 0.2);
         width: 96%;
@@ -242,7 +265,7 @@ header h1 a {
         text-decoration: none;
     }
 
-    .nav-menu ul li.mobile-auth a.signup-button { /* Style "Sign Up" button */
+    .nav-menu ul li.mobile-auth a.signup-button {
         background-color: #7cb342;
         box-shadow: 0 2px 5px rgba(124, 179, 66, 0.2);
         color: #fff;
@@ -270,13 +293,31 @@ header h1 a {
 }
 
 @media (max-width: 480px) {
+    /* Further reduce header size on very small devices */
+    header {
+        height: 55px;
+    }
+
+    .nav-menu {
+        top: 55px;
+        height: calc(100vh - 55px);
+    }
+
     header h1 a {
         font-size: 1.5em;
+        max-width: 150px; /* Prevent logo from taking too much space */
     }
 
     .nav-menu ul li.mobile-auth a {
         padding: 10px !important;
         font-size: 0.9em;
+        color: #fff;
+    }
+
+    /* Footer adjustments for very small devices */
+    footer {
+        padding: 12px 0;
+        font-size: 0.85em;
     }
 }
 
@@ -453,9 +494,9 @@ header h1 a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 15px; /* Slightly more rounded */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #fff;
     border: 1px solid #e0e0e0;
     overflow: hidden;
@@ -463,8 +504,8 @@ header h1 a {
 }
 
 .feature:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .feature::before {
@@ -478,18 +519,18 @@ header h1 a {
 }
 
 .feature-image-container {
-    position: relative; /* For overlaying the title */
+    position: relative;
     width: 100%;
-    height: 100%; /* Image covers the whole card */
+    height: 100%;
     overflow: hidden;
-    border-radius: 10px; /* Match card border-radius */
+    border-radius: 10px;
 }
 
 .feature-image-container img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
@@ -499,24 +540,23 @@ header h1 a {
 
 .feature-image-container h3 {
     position: absolute;
-    bottom: 15px; /* Title at the bottom */
+    bottom: 15px;
     left: 15px;
-    color: white; /* Style the title text */
-    font-size: 1.8em; /* Adjust title size */
+    color: white;
+    font-size: 1.8em;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     margin: 0;
-    padding: 10px; /* Add some padding around the title */
-    border-radius: 5px; /* Optional: Add border-radius to the title background */
+    padding: 10px;
+    border-radius: 5px;
     background: linear-gradient(to right, white, rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     background-clip: text;
-    /*color: transparent;*/
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .reveal-icon {
-    position: absolute; /* Position relative to the .feature card */
+    position: absolute;
     top: 10px;
     right: 10px;
     font-size: 1.5em;
@@ -526,12 +566,12 @@ header h1 a {
     z-index: 3;
     border-radius: 5px;
     padding: 5px;
-    background-color: rgba(0, 0, 0, 0.3); /* Add a background for better visibility on the image */
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.reveal-icon:hover { /* Clearer hover indication for the icon */
+.reveal-icon:hover {
     color: #fff;
-    background-color: #00bcd4; /* A more prominent background color */
+    background-color: #00bcd4;
 }
 
 .feature-content {
@@ -543,21 +583,21 @@ header h1 a {
     padding: 20px;
     text-align: left;
     font-size: 1.1em;
-    color: #fff; /* Changed text color to white for visibility on blurred image */
+    color: #fff;
     line-height: 1.7;
     font-weight: 400;
     clip-path: circle(0px at calc(100% - 20px) 20px);
     transition: clip-path 0.4s ease-in-out;
-    border-radius: 15px; /* Match card border-radius */
+    border-radius: 15px;
     box-sizing: border-box;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.3); /* Slightly darker translucent background */
-    backdrop-filter: blur(4px); /* Adjusted blur intensity */
-    padding-top: 45px; /* Added padding to push content below the icon */
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    padding-top: 45px;
 }
 
-.reveal-icon:hover + .feature-content { /* Target the sibling .feature-content */
-    clip-path: circle(150% at calc(100% - 20px) 20px); /* Expand the circle to cover the card */
+.reveal-icon:hover + .feature-content {
+    clip-path: circle(150% at calc(100% - 20px) 20px);
 }
 
 /* How It Works Section Styles */
@@ -591,10 +631,10 @@ header h1 a {
     position: absolute;
     left: 50%;
     bottom: -4px;
-    width: 60px; /* Adjust width as needed */
-    height: 5px; /* Adjust height as needed */
+    width: 60px;
+    height: 5px;
     background: linear-gradient(to right, #7cb342, #558b2f);
-    border-radius: 3px; /* Adjust radius as needed */
+    border-radius: 3px;
     transform: translateX(-50%);
 }
 
@@ -625,7 +665,7 @@ header h1 a {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
-    padding-left: 140px; /* Increased left padding to accommodate GIF */
+    padding-left: 140px;
 }
 
 .step:last-child::before {
@@ -651,11 +691,11 @@ header h1 a {
 
 .step-gif {
     position: absolute;
-    left: -120px; /* Increased negative left value to push GIF further out */
-    max-width: 100px; /* Slightly increased max-width for better visibility */
+    left: -120px;
+    max-width: 100px;
     height: auto;
     border-radius: 8px;
-    top: 25px; /* Adjusted top position for better alignment */
+    top: 25px;
 }
 
 .step-content {
@@ -690,28 +730,28 @@ header h1 a {
 .faq h2 {
     font-size: 2.9em;
     margin-bottom: 60px;
-    background: linear-gradient(to right, #00bcd4, #7cb342); /* Using both primary and secondary theme colors */
+    background: linear-gradient(to right, #00bcd4, #7cb342);
     -webkit-background-clip: text;
     color: transparent;
     display: inline-block;
     padding-bottom: 14px;
     position: relative;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.07);
-    text-align: center; /* Center the title text */
-    width: 100%; /* Ensure it takes full width for proper centering */
+    text-align: center;
+    width: 100%;
 }
 
 .faq h2::after {
     content: '';
     position: absolute;
-    left: 50%; /* Shift to the center */
+    left: 50%;
     bottom: -4px;
     width: 90px;
     height: 7px;
     background: linear-gradient(to right, #00bcd4, #00acc1);
     border-radius: 4px;
     box-shadow: 0px 1px 2px rgba(0, 188, 212, 0.3);
-    transform: translateX(-50%); /* Adjust for the width to truly center */
+    transform: translateX(-50%);
 }
 
 .faq-list {
@@ -814,7 +854,7 @@ header h1 a {
     text-align: center;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.06);
     margin-top: auto;
-    padding: 30px 0; /* Override base padding for CTA to keep 30px top padding */
+    padding: 30px 0;
 }
 
 .cta-section .container {
@@ -831,7 +871,7 @@ header h1 a {
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center; /* Add this line to center the paragraph text */
+    text-align: center;
 }
 
 /* Unified Footer Styles */
@@ -845,10 +885,10 @@ footer {
     letter-spacing: 0.5px;
     border-top: 1px solid #336666;
     box-shadow: 0px -2px 5px rgba(0,0,0,0.15);
-    margin-bottom: 0; /* Ensure no bottom margin on footer - already present, but re-confirm */
-    position: relative; /* Ensure relative positioning (or static), not absolute */
-    bottom: 0;     /* Explicitly position at bottom - relative to normal flow */
-    width: 100%;     /* Ensure full width */
+    margin-bottom: 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 footer .container {
@@ -860,7 +900,7 @@ footer .container {
 
 /* Inverted Section Styles */
 .inverted-section,
-.conversion-section { /* Combined styles for visual consistency */
+.conversion-section {
     width: 100%;
     height: 100vh;
     padding: 0;
@@ -873,15 +913,15 @@ footer .container {
 }
 
 .inverted-section {
-    background-color: #f9f9f9; /* Background for Effortlessly Convert section */
+    background-color: #f9f9f9;
 }
 
 .conversion-section {
-    background-color: #f0f2f5; /* Background for Fast 3D Image Conversion section */
+    background-color: #f0f2f5;
 }
 
 .inverted-container,
-.conversion-container { /* Combined container styles */
+.conversion-container {
     max-width: 1300px;
     margin: 0 auto;
     padding-left: 20px;
@@ -892,7 +932,7 @@ footer .container {
 }
 
 .inverted-content,
-.conversion-content { /* Combined content styles - EXCEPT flex-direction */
+.conversion-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -902,37 +942,37 @@ footer .container {
 }
 
 .inverted-content {
-    flex-direction: row; /* Image left, Text right */
+    flex-direction: row;
 }
 
 .conversion-content {
-    flex-direction: row; /* Text left, Image right - INVERSED NOW */ /* Changed to row, as per user request to inverse content */
+    flex-direction: row;
 }
 
 .inverted-image,
-.conversion-image { /* Combined image container styles */
-    flex: 1.2; /* Unified flex value */
-    max-width: 60%; /* Unified max-width value */
+.conversion-image {
+    flex: 1.2;
+    max-width: 60%;
 }
 
 .inverted-image {
-    padding-right: 30px; /* Right padding for image in Effortlessly Convert section */
+    padding-right: 30px;
 }
 
 .conversion-image {
-    padding-left: 30px; /* Left padding for image in Fast 3D Image Conversion section */
+    padding-left: 30px;
 }
 
 .inverted-text,
-.conversion-text { /* Combined text container styles */
+.conversion-text {
     flex: 1.5;
     max-width: 50%;
-    padding-left: 20px; /* Left padding unified, as text is generally on the left now */
-    padding-right: 0; /* Removed right padding, can add back if text is on the right again */
+    padding-left: 20px;
+    padding-right: 0;
 }
 
 .inverted-text h2,
-.conversion-text h2 { /* Combined headline styles */
+.conversion-text h2 {
     font-size: 3.5em;
     color: #333;
     margin-bottom: 25px;
@@ -941,7 +981,7 @@ footer .container {
 }
 
 .inverted-text p,
-.conversion-text p { /* Combined paragraph styles */
+.conversion-text p {
     font-size: 1.4em;
     color: #777;
     line-height: 1.8;
@@ -1004,13 +1044,12 @@ footer .container {
 @media (max-width: 768px) {
     /* General adjustments */
     body {
-        padding-top: 80px;
+        padding-top: 60px; /* Adjusted to match new header height */
     }
 
     .container {
         padding-left: 15px;
         padding-right: 15px;
-        /*padding-bottom: 50px;*/
     }
 
     /* Hero section */
@@ -1061,7 +1100,6 @@ footer .container {
     .inverted-section,
     .conversion-section {
         height: auto;
-        /*padding: 60px 0;*/
     }
 
     .inverted-content,
@@ -1173,10 +1211,10 @@ footer .container {
     /* Header adjustments */
     header h1 a {
         font-size: 1em;
-        white-space: nowrap; /* Prevent text from wrapping */
-        overflow: hidden; /* Hide any overflowing text */
-        text-overflow: ellipsis; /* Display an ellipsis (...) to indicate hidden text */
-        max-width: 300px; /* Adjust as needed for your layout */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px;
     }
 
     nav ul li {
@@ -1277,10 +1315,9 @@ footer .container {
     .inverted-text,
     .conversion-text {
         text-align: left;
-        order: 2; /* Comes after image/video */
+        order: 2;
         max-width: 100%;
         padding: 0;
-        /*margin-top: 30px;*/
     }
 
     /* Ensure images/videos come first */
@@ -1306,4 +1343,74 @@ footer .container {
         width: fit-content;
         margin-left: 0;
     }
+}
+
+/* Logout Button and Username Styles */
+.header-auth .username {
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95em;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.header-auth a.logout-button {
+    background-color: #e57373;
+    box-shadow: 0 2px 5px rgba(229, 115, 115, 0.2);
+}
+
+.header-auth a.logout-button:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 3px 7px rgba(211, 47, 47, 0.3);
+}
+
+.mobile-auth .username {
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95em;
+    text-align: center;
+}
+
+.mobile-auth a.logout-button {
+    background-color: #e57373;
+    box-shadow: 0 2px 5px rgba(229, 115, 115, 0.2);
+    width: 96%;
+}
+
+.mobile-auth a.logout-button:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 3px 7px rgba(211, 47, 47, 0.3);
+    text-decoration: none;
+}
+
+/* User Icon Styles */
+.username-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-auth .username-container .fa-user {
+    color: #333;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.header-auth .username-container:hover .fa-user {
+    color: #00bcd4;
+}
+
+.mobile-auth .username-container {
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.mobile-auth .username-container .fa-user {
+    color: #333;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.mobile-auth .username-container:hover .fa-user {
+    color: #00bcd4;
 }
