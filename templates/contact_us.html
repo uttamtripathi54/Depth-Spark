@@ -4,48 +4,97 @@
 <section class="contact-hero-section enhanced-hero">
     <div class="contact-hero-container container">
         <h1>Contact Us</h1>
-        <p>We'd love to hear from you! Please fill out the form below.</p>
+        <p>We'd love to hear from you! Please fill out the form below or reach out using our contact details.</p>
     </div>
 </section>
 
-<main role="main">
-    <section class="contact-section">
+<main role="main">    <section class="contact-section">
         <div class="container">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            {% for category, message in messages %}
-            <div class="flash-message {{ category }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
             <div class="content">
                 <div class="image-box">
                     <img src="{{ url_for('static', filename='images/contact_us.jpg') }}" alt="Contact Us Illustration">
                 </div>
-                <form action="/submit-contact-form" method="POST">
+                <div class="contact-form-container">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="flash-message {{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <div class="topic">Send us a message</div>
-                    <div class="input-box">
-                        <input type="text" name="name" id="name" required>
-                        <label for="name">Enter your name *</label>
-                    </div>
-                    <div class="input-box">
-                        <input type="email" name="email" id="email" required>
-                        <label for="email">Enter your email *</label>
-                    </div>
-                    <div class="input-box">
-                        <input type="text" name="subject" id="subject" required>
-                        <label for="subject">Enter your subject *</label>
-                    </div>
-                    <div class="message-box">
-                        <textarea name="message" id="message" required></textarea>
-                        <label for="message">Enter your message *</label>
-                    </div>
-                    <div class="input-box">
-                        <input type="submit" value="Send Message">
-                    </div>
-                </form>
+                    <form action="/submit-contact-form" method="POST">
+                        <div class="input-box">
+                            <input type="text" name="name" id="name" required>
+                            <label for="name">Enter your name *</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="email" name="email" id="email" required>
+                            <label for="email">Enter your email *</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="subject" id="subject" required>
+                            <label for="subject">Enter your subject *</label>
+                        </div>
+                        <div class="message-box">
+                            <textarea name="message" id="message" required></textarea>
+                            <label for="message">Enter your message *</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="submit" value="Send Message">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-info-section" aria-labelledby="contact-info-heading">
+        <div class="container">
+            <h2 class="contact-info-title" id="contact-info-heading">Connect With Us</h2>
+            <div class="contact-info-grid">
+                <div class="contact-detail-card" aria-label="Email us at depthspark2025@gmail.com">
+                    <img src="{{ url_for('static', filename='images/email.gif') }}" alt="Animated email icon" class="contact-gif">
+                    <h3>Email</h3>
+                    <p>
+                        <a href="mailto:depthspark2025@gmail.com?subject=Contact%20Us%20Inquiry&body=Hello%20Depth’expression: "Spark%20Team,%0D%0A" 
+                           class="contact-link" 
+                           data-type="email" 
+                           aria-describedby="email-tooltip">
+                            depthspark2025@gmail.com
+                        </a>
+                        <span id="email-tooltip" class="tooltip" role="tooltip">Click to send an email</span>
+                    </p>
+                </div>
+                <div class="contact-detail-card" aria-label="Call us at 8545868440 or 8090652011">
+                    <img src="{{ url_for('static', filename='images/phone.gif') }}" alt="Animated phone icon" class="contact-gif">
+                    <h3>Phone</h3>
+                    <p>
+                        <a href="tel:+918545868440" 
+                           class="contact-link" 
+                           data-type="phone" 
+                           title="Call 8545868440" 
+                           aria-describedby="phone1-tooltip">
+                            8545868440
+                        </a>,
+                        <span id="phone1-tooltip" class="tooltip" role="tooltip">Click to call</span>
+                        <a href="tel:+918090652011" 
+                           class="contact-link" 
+                           data-type="phone" 
+                           title="Call 8090652011" 
+                           aria-describedby="phone2-tooltip">
+                            8090652011
+                        </a>
+                        <span id="phone2-tooltip" class="tooltip" role="tooltip">Click to call</span>
+                    </p>
+                </div>
+                <div class="contact-detail-card" aria-label="Visit us in Lucknow, Uttar Pradesh">
+                    <img src="{{ url_for('static', filename='images/address.gif') }}" alt="Animated address icon" class="contact-gif">
+                    <h3>Address</h3>
+                    <p>Lucknow, Uttar Pradesh</p>
+                </div>
             </div>
         </div>
     </section>
@@ -66,8 +115,9 @@
         --teal-lighter: #b2ebf2;
         --teal-light: #80deea;
         --teal-medium: #26a69a;
-        --teal-dark: #00897b;
-        --teal-darker: #00695c;
+        --teal-dark: #00695c;
+        --teal-darker: #004d40;
+        --gradient-teal: linear-gradient(135deg, var(--teal-lighter), var(--teal-dark));
     }
 
     /* Enhanced Hero Section */
@@ -122,7 +172,7 @@
         }
     }
 
-    /* Contact Section */
+    /* Contact Form Section */
     .contact-section {
         padding: 80px 0;
         display: flex;
@@ -169,15 +219,20 @@
         border-radius: 8px;
     }
 
+    .content .contact-form-container {
+        width: 40%;
+        margin-right: 30px;
+    }
+
     .content .topic {
         font-size: 22px;
         font-weight: 500;
         color: var(--teal-dark);
+        margin-bottom: 20px;
     }
 
     .content form {
-        width: 40%;
-        margin-right: 30px;
+        width: 100%;
     }
 
     .content .input-box {
@@ -288,25 +343,229 @@
         background-color: var(--teal-darker);
     }
 
-    /* Flash Messages */
+    /* Enhanced Contact Info Section */
+    .contact-info-section {
+        padding: 100px 0;
+        position: relative;
+        background: var(--gradient-teal);
+        animation: gradientShift 20s ease infinite;
+        background-size: 200% 200%;
+        overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .contact-info-section .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-info-title {
+        font-size: 2.8em;
+        font-weight: 900;
+        color: var(--teal-dark);
+        text-align: center;
+        margin-bottom: 60px;
+        font-family: 'Orbitron', 'Montserrat', sans-serif;
+        text-shadow: 0 0 8px rgba(38, 166, 154, 0.4);
+        transition: transform 0.3s ease;
+    }
+
+    .contact-info-title:hover {
+        transform: scale(1.05);
+    }
+
+    .contact-info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-detail-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+        background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box, var(--gradient-teal) border-box;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .contact-detail-card:nth-child(1) { animation-delay: 0.2s; }
+    .contact-detail-card:nth-child(2) { animation-delay: 0.4s; }
+    .contact-detail-card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes cardFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .contact-detail-card:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        border-color: var(--teal-medium);
+    }
+
+    .contact-detail-card:focus {
+        outline: none;
+        border-color: var(--teal-medium);
+        box-shadow: 0 0 0 4px rgba(38, 166, 154, 0.3);
+    }
+
+    .contact-gif {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 15px;
+        border-radius: 50%;
+        border: 3px solid var(--teal-medium);
+        box-shadow: 0 0 12px rgba(38, 166, 154, 0.6);
+        animation: bounce 3s ease infinite;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-detail-card:hover .contact-gif {
+        transform: scale(1.1);
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+    }
+
+    .contact-detail-card h3 {
+        font-size: 1.6em;
+        font-weight: 800;
+        color: var(--teal-dark);
+        margin-bottom: 12px;
+        font-family: 'Orbitron', 'Arial', sans-serif;
+        text-shadow: 0 0 5px rgba(38, 166, 154, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .contact-detail-card:hover h3 {
+        transform: scale(1.05);
+    }
+
+    .contact-detail-card p {
+        font-size: 1.2em;
+        color: #2a333a;
+        margin: 0;
+        line-height: 1.6;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .contact-link {
+        color: var(--teal-medium);
+        text-decoration: none;
+        position: relative;
+        padding: 4px 8px;
+        display: inline-block;
+        transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-link:hover {
+        color: var(--teal-darker);
+        text-decoration: underline;
+        transform: scale(1.05);
+        box-shadow: 0 0 8px rgba(38, 166, 154, 0.5);
+    }
+
+    .contact-link:active {
+        animation: clickPulse 0.3s ease;
+    }
+
+    @keyframes clickPulse {
+        0% { transform: scale(1); box-shadow: 0 0 8px rgba(38, 166, 154, 0.5); }
+        50% { transform: scale(0.95); box-shadow: 0 0 12px rgba(38, 166, 154, 0.7); }
+        100% { transform: scale(1); box-shadow: 0 0 8px rgba(38, 166, 154, 0.5); }
+    }
+
+    .contact-link:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(38, 166, 154, 0.4);
+        border-radius: 4px;
+    }
+
+    .tooltip {
+        visibility: hidden;
+        background: var(--teal-dark);
+        color: #fff;
+        font-size: 0.9em;
+        padding: 5px 10px;
+        border-radius: 4px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        z-index: 10;
+        transition: visibility 0.2s ease, opacity 0.2s ease;
+        opacity: 0;
+    }
+
+    .contact-link:hover + .tooltip,
+    .contact-link:focus + .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }    /* Flash Messages */
     .flash-message {
-        padding: 15px;
-        margin: 15px;
-        border-radius: 6px;
+        padding: 15px 20px;
+        margin: 0 0 20px 0;
+        border-radius: 8px;
         text-align: center;
         font-weight: 500;
+        position: relative;
+        animation: slideDown 0.5s ease-out forwards;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .flash-message.success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
+        background-color: #e3f6f1;
+        color: var(--teal-dark);
+        border: 1px solid var(--teal-medium);
+    }
+
+    .flash-message.success::before {
+        content: '✓';
+        margin-right: 10px;
+        font-weight: bold;
+        color: var(--teal-dark);
     }
 
     .flash-message.error {
         background-color: #f8d7da;
         color: #721c24;
         border: 1px solid #f5c6cb;
+    }
+
+    .flash-message.error::before {
+        content: '✕';
+        margin-right: 10px;
+        font-weight: bold;
+        color: #721c24;
     }
 
     /* Responsive Design */
@@ -318,6 +577,11 @@
         .content {
             padding: 10px 0;
         }
+
+        .contact-info-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
     }
 
     @media (max-width: 900px) {
@@ -325,9 +589,77 @@
             display: none;
         }
 
-        .content form {
+        .content .contact-form-container {
             width: 100%;
             margin-left: 30px;
+        }
+
+        .contact-info-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .contact-hero-container h1 {
+            font-size: 2.5em;
+        }
+
+        .contact-hero-container p {
+            font-size: 1.2em;
+        }
+
+        .contact-info-title {
+            font-size: 2.4em;
+        }
+
+        .contact-detail-card {
+            padding: 25px;
+        }
+
+        .contact-gif {
+            width: 60px;
+            height: 60px;
+        }
+
+        .contact-detail-card h3 {
+            font-size: 1.4em;
+        }
+
+        .contact-detail-card p {
+            font-size: 1.1em;
+        }
+
+        .contact-link {
+            padding: 3px 6px;
+            font-size: 1em;
+        }
+
+        .tooltip {
+            font-size: 0.8em;
+            top: -25px;
+        }
+
+        /* Mobile scrolling improvements */
+        html {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .contact-section, 
+        .contact-info-section {
+            padding: 50px 0;
+        }
+
+        .contact-section .container,
+        .contact-info-section .container {
+            margin: 10px;
         }
     }
 </style>
@@ -335,17 +667,31 @@
 
 {% block js %}
 <script>
-    // JavaScript to handle floating label behavior
+    // Auto-hide flash messages
+    document.addEventListener('DOMContentLoaded', function() {
+        const flashMessages = document.querySelectorAll('.flash-message');
+        flashMessages.forEach(message => {
+            setTimeout(() => {
+                message.style.opacity = '0';
+                message.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    message.remove();
+                }, 500);
+            }, 5000);
+        });
+    });
+
+    // JavaScript to handle floating label behavior and link tracking
     document.addEventListener('DOMContentLoaded', function () {
         const inputs = document.querySelectorAll('.input-box input, .message-box textarea');
+        const contactLinks = document.querySelectorAll('.contact-link');
 
+        // Floating label behavior for form inputs
         inputs.forEach(input => {
-            // Check initial state
             if (input.value.trim() !== '') {
                 input.classList.add('active');
             }
 
-            // Add event listeners for focus and input
             input.addEventListener('focus', function () {
                 this.classList.add('active');
             });
@@ -364,6 +710,26 @@
                 }
             });
         });
+
+        // Track contact link clicks
+        contactLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                const type = this.getAttribute('data-type');
+                const href = this.href;
+                const linkText = this.textContent.trim();
+                console.log(`Contact link clicked: ${type}, URL: ${href}, Text: ${linkText}, Time: ${new Date().toISOString()}`);
+                
+                // For phone links, alert on non-mobile devices
+                if (type === 'phone' && !/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    e.preventDefault();
+                    alert(`Please dial ${linkText} from your phone`);
+                }
+                // Email links use default behavior (mailto:)
+            });
+        });
+
+        // Mobile touch improvements
+        document.body.addEventListener('touchstart', function() {}, { passive: true });
     });
 </script>
 {% endblock %}

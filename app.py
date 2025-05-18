@@ -9,6 +9,12 @@ from model import process_image_to_3d
 import tempfile
 import shutil
 import magic  # For file type validation
+from dotenv import load_dotenv
+from flask_mail import Mail, Message
+from datetime import datetime, timedelta
+import random
+import string
+load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -16,15 +22,23 @@ app.config['SECRET_KEY'] = 'secret_key'
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['MODEL_FOLDER'] = os.path.join(app.static_folder, 'models')
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+mail = Mail(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    reset_token = db.Column(db.String(6))
+    reset_token_expiry = db.Column(db.DateTime)
 
     def __repr__(self):
         return 'User ' + str(self.id)
@@ -93,11 +107,14 @@ def login():
         email_or_username = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email_or_username).first() or User.query.filter_by(username=email_or_username).first()
+        
         if user and user.check_password(password):
             session['user'] = user.username
+            flash('Login successful!', 'success')
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', message='Invalid email or password')
+            error = 'Invalid email or password'
+            return render_template('login.html', error=error)
     return render_template('login.html')
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -123,16 +140,8 @@ def convert():
     if 'user' not in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
-        option = request.form.get('option')
-        motion_effect = request.form.get('motion_effect')
         image_url = request.form.get('image_url')
         file = request.files.get('file')
-
-        if not option:
-            return jsonify({'error': 'Please select a 3D experience option'}), 400
-
-        if option == 'animation' and not motion_effect:
-            return jsonify({'error': 'Please select a motion effect for animation'}), 400
 
         if not image_url and not file:
             return jsonify({'error': 'Please provide an image URL or upload a file'}), 400
@@ -151,91 +160,86 @@ def convert():
 
             print('fal_client result:', result)  # Log the full result for debugging
 
-            # Process the result based on the selected option
+            # Process the result for 3D model
             output = {}
-            if option == 'animation':
-                output['video_url'] = result.get('video_url', '')
-            elif option == 'static':
-                output['image_url'] = result.get('image_url', '')
-            elif option == 'interactive':
-                # Try multiple possible keys for the model, including nested model_mesh.url
-                possible_keys = ['model_url', 'model', 'glb_url', 'output', 'file_url', 'gltf_url']
-                model_url = None
-                for key in possible_keys:
-                    model_url = result.get(key)
-                    if model_url and isinstance(model_url, str) and model_url.startswith(('http://', 'https://')):
-                        print(f"Found model URL in key '{key}': {model_url}")
-                        break
-                # Check for nested model_mesh.url
-                if not model_url and 'model_mesh' in result and isinstance(result['model_mesh'], dict):
-                    model_url = result['model_mesh'].get('url')
-                    if model_url and isinstance(model_url, str) and model_url.startswith(('http://', 'https://')):
-                        print(f"Found model URL in model_mesh.url: {model_url}")
-                    else:
-                        model_url = None
+            # Try multiple possible keys for the model, including nested model_mesh.url
+            possible_keys = ['model_url', 'model', 'glb_url', 'output', 'file_url', 'gltf_url']
+            model_url = None
+            for key in possible_keys:
+                model_url = result.get(key)
+                if model_url and isinstance(model_url, str) and model_url.startswith(('http://', 'https://')):
+                    print(f"Found model URL in key '{key}': {model_url}")
+                    break
+            # Check for nested model_mesh.url
+            if not model_url and 'model_mesh' in result and isinstance(result['model_mesh'], dict):
+                model_url = result['model_mesh'].get('url')
+                if model_url and isinstance(model_url, str) and model_url.startswith(('http://', 'https://')):
+                    print(f"Found model URL in model_mesh.url: {model_url}")
+                else:
+                    model_url = None
 
-                if model_url:
-                    # Download the model to static/models
+            if model_url:
+                # Download the model to static/models
+                model_filename = f"model_{uuid.uuid4()}.glb"
+                model_path = os.path.join(app.config['MODEL_FOLDER'], model_filename)
+                os.makedirs(app.config['MODEL_FOLDER'], exist_ok=True)
+
+                try:
+                    response = requests.get(model_url, stream=True, timeout=10)
+                    if response.status_code == 200:
+                        # Save to a temporary file first
+                        temp_model_path = os.path.join(app.config['UPLOAD_FOLDER'], f"temp_{model_filename}")
+                        with open(temp_model_path, 'wb') as f:
+                            for chunk in response.iter_content(chunk_size=8192):
+                                if chunk:
+                                    f.write(chunk)
+                        
+                        # Validate the file
+                        if is_valid_gltf(temp_model_path):
+                            shutil.move(temp_model_path, model_path)
+                            output['model_url'] = url_for('static', filename=f'models/{model_filename}')
+                            print(f"Successfully saved model to {model_path}")
+                        else:
+                            print(f"Invalid GLTF file downloaded from {model_url}")
+                            os.remove(temp_model_path)
+                            output['model_url'] = ''
+                    else:
+                        print(f"Failed to download model from {model_url}: HTTP {response.status_code}")
+                        output['model_url'] = ''
+                except Exception as e:
+                    print(f"Error downloading model from {model_url}: {str(e)}")
+                    output['model_url'] = ''
+            else:
+                # Check if result contains binary data or a file
+                if isinstance(result, bytes) or (isinstance(result, dict) and 'data' in result and isinstance(result['data'], bytes)):
                     model_filename = f"model_{uuid.uuid4()}.glb"
                     model_path = os.path.join(app.config['MODEL_FOLDER'], model_filename)
                     os.makedirs(app.config['MODEL_FOLDER'], exist_ok=True)
-
+                    temp_model_path = os.path.join(app.config['UPLOAD_FOLDER'], f"temp_{model_filename}")
+                    
                     try:
-                        response = requests.get(model_url, stream=True, timeout=10)
-                        if response.status_code == 200:
-                            # Save to a temporary file first
-                            temp_model_path = os.path.join(app.config['UPLOAD_FOLDER'], f"temp_{model_filename}")
-                            with open(temp_model_path, 'wb') as f:
-                                for chunk in response.iter_content(chunk_size=8192):
-                                    if chunk:
-                                        f.write(chunk)
-                            
-                            # Validate the file
-                            if is_valid_gltf(temp_model_path):
-                                shutil.move(temp_model_path, model_path)
-                                output['model_url'] = url_for('static', filename=f'models/{model_filename}')
-                                print(f"Successfully saved model to {model_path}")
-                            else:
-                                print(f"Invalid GLTF file downloaded from {model_url}")
-                                os.remove(temp_model_path)
-                                output['model_url'] = ''
+                        if isinstance(result, bytes):
+                            model_data = result
                         else:
-                            print(f"Failed to download model from {model_url}: HTTP {response.status_code}")
+                            model_data = result['data']
+                        
+                        with open(temp_model_path, 'wb') as f:
+                            f.write(model_data)
+                        
+                        if is_valid_gltf(temp_model_path):
+                            shutil.move(temp_model_path, model_path)
+                            output['model_url'] = url_for('static', filename=f'models/{model_filename}')
+                            print(f"Successfully saved model from binary data to {model_path}")
+                        else:
+                            print("Invalid GLTF data in fal_client result")
+                            os.remove(temp_model_path)
                             output['model_url'] = ''
                     except Exception as e:
-                        print(f"Error downloading model from {model_url}: {str(e)}")
+                        print(f"Error saving model from binary data: {str(e)}")
                         output['model_url'] = ''
                 else:
-                    # Check if result contains binary data or a file
-                    if isinstance(result, bytes) or (isinstance(result, dict) and 'data' in result and isinstance(result['data'], bytes)):
-                        model_filename = f"model_{uuid.uuid4()}.glb"
-                        model_path = os.path.join(app.config['MODEL_FOLDER'], model_filename)
-                        os.makedirs(app.config['MODEL_FOLDER'], exist_ok=True)
-                        temp_model_path = os.path.join(app.config['UPLOAD_FOLDER'], f"temp_{model_filename}")
-                        
-                        try:
-                            if isinstance(result, bytes):
-                                model_data = result
-                            else:
-                                model_data = result['data']
-                            
-                            with open(temp_model_path, 'wb') as f:
-                                f.write(model_data)
-                            
-                            if is_valid_gltf(temp_model_path):
-                                shutil.move(temp_model_path, model_path)
-                                output['model_url'] = url_for('static', filename=f'models/{model_filename}')
-                                print(f"Successfully saved model from binary data to {model_path}")
-                            else:
-                                print("Invalid GLTF data in fal_client result")
-                                os.remove(temp_model_path)
-                                output['model_url'] = ''
-                        except Exception as e:
-                            print(f"Error saving model from binary data: {str(e)}")
-                            output['model_url'] = ''
-                    else:
-                        print('No valid model URL or data found in fal_client result:', result)
-                        output['model_url'] = ''
+                    print('No valid model URL or data found in fal_client result:', result)
+                    output['model_url'] = ''
 
             return jsonify({'success': True, 'result': output})
 
@@ -272,6 +276,95 @@ def submit_contact():
             db.session.rollback()
         
         return redirect(url_for('contact_us'))
+
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = User.query.filter_by(email=email).first()
+        
+        if user:
+            # Generate 6-digit OTP
+            otp = ''.join(random.choices(string.digits, k=6))
+            user.reset_token = otp
+            user.reset_token_expiry = datetime.utcnow() + timedelta(minutes=15)
+            
+            # Send email with OTP
+            msg = Message('Password Reset Request',
+                        sender=app.config['MAIL_USERNAME'],
+                        recipients=[email])
+            msg.body = f'''To reset your password, use the following code:
+
+{otp}
+
+This code will expire in 15 minutes.
+
+If you did not request a password reset, please ignore this email.
+'''
+            mail.send(msg)
+            db.session.commit()
+            
+            flash('Password reset code has been sent to your email.', 'success')
+            return render_template('verify_otp.html', email=email)
+        else:
+            flash('No account found with that email address.', 'error')
+    
+    return render_template('forgot_password.html')
+
+@app.route('/verify-reset-token', methods=['POST'])
+def verify_reset_token():
+    email = request.form['email']
+    otp = request.form['otp']
+    
+    user = User.query.filter_by(email=email).first()
+    
+    if not user:
+        flash('Invalid email address.', 'error')
+        return redirect(url_for('forgot_password'))
+    
+    if not user.reset_token or not user.reset_token_expiry:
+        flash('No reset code was requested.', 'error')
+        return redirect(url_for('forgot_password'))
+    
+    if datetime.utcnow() > user.reset_token_expiry:
+        flash('Reset code has expired. Please request a new one.', 'error')
+        return redirect(url_for('forgot_password'))
+    
+    if user.reset_token != otp:
+        flash('Invalid reset code.', 'error')
+        return render_template('verify_otp.html', email=email)
+    
+    return render_template('reset_password.html', email=email, token=otp)
+
+@app.route('/reset-password', methods=['POST'])
+def reset_password():
+    email = request.form['email']
+    token = request.form['token']
+    password = request.form['password']
+    confirm_password = request.form['confirm_password']
+    
+    if password != confirm_password:
+        flash('Passwords do not match.', 'error')
+        return render_template('reset_password.html', email=email, token=token)
+    
+    user = User.query.filter_by(email=email).first()
+    
+    if not user or not user.reset_token or user.reset_token != token:
+        flash('Invalid reset request.', 'error')
+        return redirect(url_for('forgot_password'))
+    
+    if datetime.utcnow() > user.reset_token_expiry:
+        flash('Reset code has expired. Please request a new one.', 'error')
+        return redirect(url_for('forgot_password'))
+    
+    # Update password
+    user.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    user.reset_token = None
+    user.reset_token_expiry = None
+    db.session.commit()
+    
+    flash('Your password has been reset successfully. Please log in with your new password.', 'success')
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

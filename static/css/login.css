@@ -123,6 +123,124 @@
     to { opacity: 1; }
 }
 
+/* Error Message Styles */
+.flash-message,
+.error-message {
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    width: 100%;
+    animation: fadeInDown 0.3s ease-out;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.flash-message.success {
+    background-color: rgba(212, 237, 218, 0.95);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error,
+.error-message {
+    background-color: rgba(248, 215, 218, 0.95);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message {
+    display: none;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-align: left;
+    padding: 8px 12px;
+}
+
+.form-group .error-message.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flash-message, .error-message {
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    width: 100%;
+    animation: fadeInDown 0.5s ease-out;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flash-message.success {
+    background-color: rgba(212, 237, 218, 0.95);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error, .error-message {
+    background-color: rgba(248, 215, 218, 0.95);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    display: block;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make form errors more visible */
+.form-group .error-message {
+    display: block;
+    margin-top: 5px;
+    padding: 8px 12px;
+}
+
+/* Loading State Styles */
+.loading-indicator {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #26a69a;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.loading-indicator i {
+    animation: spin 1s linear infinite;
+}
+
+.login-form.loading .button {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .login-form-container {
     width: 100%;
     max-width: 380px;
@@ -266,6 +384,284 @@
 
 .loading-indicator[style*="block"] {
     opacity: 1;
+}
+
+/* Auth Links */
+.auth-links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.forgot-password-link {
+    color: #00bcd4;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.forgot-password-link:hover {
+    color: #008ba3;
+    text-decoration: underline;
+    transform: translateX(2px);
+}
+
+.forgot-password-link i {
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+}
+
+.forgot-password-link:hover i {
+    transform: translateX(2px);
+}
+
+/* Password Reset Flow Specific Styles */
+.password-strength-indicator {
+    margin-top: 8px;
+    text-align: left;
+}
+
+.strength-level {
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    margin-bottom: 4px;
+}
+
+.strength-level.strength-weak {
+    width: 30%;
+    background: #ff5252;
+}
+
+.strength-level.strength-moderate {
+    width: 70%;
+    background: #ffc107;
+}
+
+.strength-level.strength-strong {
+    width: 100%;
+    background: #4caf50;
+}
+
+#strengthText {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.strength-text {
+    font-size: 0.85em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.strength-text i {
+    font-size: 1em;
+}
+
+.strength-text.weak { color: #ff5252; }
+.strength-text.moderate { color: #ffd740; }
+.strength-text.strong { color: #69f0ae; }
+
+.reset-progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto 25px;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #666;
+    border: 2px solid #00bcd4;
+    transition: all 0.3s ease;
+}
+
+.step-label {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.progress-step.active .step-number {
+    background: #00bcd4;
+    color: #fff;
+}
+
+.progress-step.completed .step-number {
+    background: #69f0ae;
+    border-color: #69f0ae;
+    color: #fff;
+}
+
+.progress-line {
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 0;
+}
+
+.otp-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.2em;
+    letter-spacing: 0.5em;
+    text-align: center;
+    font-family: monospace;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.otp-input:focus {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
+    outline: none;
+}
+
+.action-button {
+    background: transparent;
+    border: none;
+    color: #00bcd4;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-button:hover {
+    color: #008ba3;
+    transform: translateX(2px);
+}
+
+.action-button i {
+    font-size: 0.9em;
+}
+
+.password-requirements {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.requirement-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 3px 0;
+}
+
+.requirement-item i {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.requirement-item.met i {
+    color: #69f0ae;
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideDown 0.3s ease;
+}
+
+.alert-success {
+    background: rgba(105, 240, 174, 0.2);
+    color: #2e7d32;
+    border: 1px solid rgba(105, 240, 174, 0.4);
+}
+
+.alert-danger {
+    background: rgba(255, 82, 82, 0.2);
+    color: #d32f2f;
+    border: 1px solid rgba(255, 82, 82, 0.4);
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Timer Styles */
+.timer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #666;
+}
+
+.timer-container i {
+    color: #00bcd4;
+}
+
+.countdown-timer {
+    font-family: 'Montserrat', monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #00bcd4;
+}
+
+.timer-text {
+    font-size: 0.9em;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.countdown-timer.expiring {
+    color: #ff5252;
+    animation: pulse 1s infinite;
 }
 
 /* Responsive Adjustments */

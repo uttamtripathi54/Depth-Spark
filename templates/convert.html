@@ -258,220 +258,6 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    /* Options Section */
-    .options-section {
-        max-width: 1100px;
-        margin: 0 auto 70px;
-        padding: 50px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 25px;
-        box-shadow: 0 25px 70px rgba(0, 188, 212, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(10px);
-    }
-
-    .options-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 12px;
-        background: linear-gradient(90deg, #00bcd4, #7cb342, #ab47bc);
-    }
-
-    .options-section h2 {
-        font-size: 2.2em;
-        color: #333;
-        margin-bottom: 40px;
-        text-align: center;
-        font-weight: 800;
-        text-shadow: 0 2px 8px rgba(0, 188, 212, 0.2);
-    }
-
-    .option-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        justify-content: center;
-    }
-
-    .option-card {
-        flex: 1;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0, 188, 212, 0.1);
-        transition: all 0.4s ease;
-        cursor: pointer;
-        border: 3px solid transparent;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(5px);
-    }
-
-    .option-card::before {
-        content: '';
-       /Parcel/Applications/3D-Image-Converter/static/images/perspective.gifposition: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 6px;
-        background: linear-gradient(90deg, #00bcd4, #7cb342, #ab47bc);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s ease;
-    }
-
-    .option-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 25px 50px rgba(0, 188, 212, 0.2);
-    }
-
-    .option-card.selected {
-        border-color: rgba(0, 188, 212, 0.5);
-        background: rgba(248, 253, 254, 0.95);
-        transform: translateY(-5px);
-        box-shadow: 0 20px 45px rgba(0, 188, 212, 0.25);
-    }
-
-    .option-card.selected::before {
-        transform: scaleX(1);
-    }
-
-    .option-icon {
-        font-size: 3.5em;
-        color: #00bcd4;
-        margin-bottom: 20px;
-        transition: all 0.4s ease;
-    }
-
-    .option-card.selected .option-icon {
-        color: #7cb342;
-        transform: scale(1.2);
-    }
-
-    .option-title {
-        font-size: 1.6em;
-        font-weight: 700;
-        margin-bottom: 15px;
-        color: #333;
-        transition: all 0.3s ease;
-    }
-
-    .option-card:hover .option-title {
-        color: #00bcd4;
-    }
-
-    .option-desc {
-        font-size: 1.1em;
-        color: #555;
-        line-height: 1.7;
-    }
-
-    .option-icon img {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-    }
-
-    /* Motion Effects Section */
-    .motion-effects-section {
-        display: none;
-        max-width: 900px;
-        margin: 0 auto 60px;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 25px;
-        box-shadow: 0 20px 60px rgba(0, 188, 212, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        animation: fadeIn 0.8s ease;
-    }
-
-    .motion-effects-section.active {
-        display: block;
-    }
-
-    .motion-effects-section h2 {
-        font-size: 2em;
-        color: #333;
-        margin-bottom: 35px;
-        text-align: center;
-        font-weight: 800;
-        text-shadow: 0 2px 8px rgba(0, 188, 212, 0.2);
-    }
-
-    .motion-effects-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .motion-effect-card {
-        flex: 1;
-        min-width: 180px;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 20px 15px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 188, 212, 0.1);
-        transition: all 0.4s ease;
-        cursor: pointer;
-        border: 3px solid transparent;
-        text-align: center;
-        position: relative;
-    }
-
-    .motion-effect-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(0, 188, 212, 0.2);
-    }
-
-    .motion-effect-card.selected {
-        border-color: rgba(0, 188, 212, 0.5);
-        background: rgba(248, 253, 254, 0.95);
-        transform: translateY(-3px);
-    }
-
-    .motion-effect-icon {
-        margin-bottom: 15px;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .motion-effect-icon img {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .motion-effect-card.selected .motion-effect-icon {
-        transform: scale(1.1);
-    }
-
-    .motion-effect-title {
-        font-size: 1.3em;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 8px;
-    }
-
-    .motion-effect-desc {
-        font-size: 0.9em;
-        color: #666;
-        margin-top: 5px;
-    }
-
     /* Convert Button */
     .convert-btn-container {
         text-align: center;
@@ -527,7 +313,7 @@
         left: 100%;
     }
 
-    /* Advanced Progress Tracker */
+    /* Enhanced Progress Tracker */
     .progress-tracker {
         display: none;
         text-align: left;
@@ -772,89 +558,6 @@
         font-style: italic;
     }
 
-    /* Responsive Adjustments */
-    @media (max-width: 992px) {
-        .progress-tracker {
-            padding: 30px 20px;
-            margin: 50px auto;
-        }
-        .progress-title {
-            font-size: 1.8em;
-        }
-        .progress-stages {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .progress-stage {
-            padding-top: 0;
-            padding-left: 40px;
-            text-align: left;
-        }
-        .progress-stage::before {
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-        .progress-stage.completed::after {
-            top: 50%;
-            left: 8px;
-            transform: translateY(-50%);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .progress-tracker {
-            padding: 25px 15px;
-        }
-        .progress-title {
-            font-size: 1.6em;
-        }
-        .progress-control-btn {
-            padding: 8px 16px;
-            font-size: 0.9em;
-        }
-        .progress-bar-container {
-            height: 12px;
-        }
-        .progress-status {
-            font-size: 0.9em;
-            padding: 8px 12px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .progress-tracker {
-            padding: 20px 10px;
-            margin: 40px auto;
-        }
-        .progress-title {
-            font-size: 1.4em;
-        }
-        .progress-title::after {
-            width: 60px;
-        }
-        .progress-control-btn {
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-        .progress-stage {
-            font-size: 0.9em;
-            padding-left: 35px;
-        }
-        .progress-stage::before {
-            width: 20px;
-            height: 20px;
-        }
-        .progress-status {
-            font-size: 0.85em;
-            padding: 6px 10px;
-        }
-        .progress-timestamp {
-            font-size: 0.8em;
-        }
-    }
-
     /* Result Container */
     .result-container {
         display: none;
@@ -941,7 +644,7 @@
         border: 2px solid rgba(0, 188, 212, 0.3);
         background: linear-gradient(135deg, #f0f0f0, #fafafa);
         box-shadow: 
-            0 15px 40 horrifiedpx rgba(0, 188, 212, 0.2),
+            0 15px 40px rgba(0, 188, 212, 0.2),
             inset 0 0 30px rgba(0, 188, 212, 0.1);
         transition: all 0.4s ease;
     }
@@ -965,42 +668,6 @@
 
     #interactiveModel:hover {
         --progress-bar-color: #7cb342;
-    }
-
-    .motion-video-container {
-        width: 100%;
-        border-radius: 15px;
-        overflow: hidden;
-        margin-bottom: 25px;
-        box-shadow: 0 15px 40px rgba(0, 188, 212, 0.2);
-    }
-
-    #motionVideo {
-        width: 100%;
-        max-height: 450px;
-        object-fit: contain;
-        background: #000;
-        border-radius: 15px;
-    }
-
-    .static-image-container {
-        width: 100%;
-        border-radius: 15px;
-        overflow: hidden;
-        margin-bottom: 25px;
-        box-shadow: 0 15px 40px rgba(0, 188, 212, 0.2);
-    }
-
-    #staticImage {
-        width: 100%;
-        max-height: 450px;
-        object-fit: contain;
-        border-radius: 15px;
-        transition: transform 0.4s ease;
-    }
-
-    #staticImage:hover {
-        transform: scale(1.05);
     }
 
     .viewer-controls {
@@ -1269,16 +936,6 @@
         .model-viewer-container {
             height: 450px;
         }
-        .progress-stages {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .progress-stage::before {
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
     }
 
     @media (max-width: 768px) {
@@ -1286,10 +943,8 @@
         .convert-header p { font-size: 1.3em; }
         .input-container { flex-direction: column; }
         .url-submit-btn, .upload-btn { width: 100%; }
-        .option-group { flex-direction: column; }
         .preview-box { min-width: 100%; padding: 30px 20px; }
-        .model-viewer-container, .motion-video-container, .static-image-container { height: 380px; }
-        .options-section { padding: 40px 20px; }
+        .model-viewer-container { height: 380px; }
         .url-input { font-size: 1em; padding: 14px 16px; }
         .url-input::placeholder { font-size: 0.95em; }
         .model-controls {
@@ -1313,7 +968,6 @@
         }
     }
 
-    /* Responsive Adjustments for max-width: 576px */
     @media (max-width: 576px) {
         .convert-header h1 {
             font-size: 2.2em;
@@ -1351,9 +1005,6 @@
                 0 15px 35px rgba(0, 188, 212, 0.2),
                 inset 0 0 25px rgba(0, 188, 212, 0.1);
             border-color: rgba(0, 188, 212, 0.4);
-        }
-        .motion-video-container, .static-image-container {
-            height: 280px;
         }
         .model-controls {
             bottom: 10px;
@@ -1481,76 +1132,6 @@
         <p>Your image is ready for magical 3D transformation!</p>
     </div>
 
-    <!-- Options Section -->
-    <div class="options-section" role="region" aria-label="3D Conversion Options">
-        <h2>Choose Your 3D Experience</h2>
-        <div class="option-group" role="radiogroup">
-            <div class="option-card" data-option="animation" role="radio" aria-checked="false" tabindex="0">
-                <div class="option-icon">
-                    <img src="{{ url_for('static', filename='images/video.gif') }}" alt="3D Animation Icon">
-                </div>
-                <h3 class="option-title">3D Animation</h3>
-                <p class="option-desc">Bring your image to life with a dynamic 3D animation that showcases depth and perspective through smooth camera movements.</p>
-            </div>
-            <div class="option-card" data-option="static" role="radio" aria-checked="false" tabindex="0">
-                <div class="option-icon">
-                    <img src="{{ url_for('static', filename='images/image.gif') }}" alt="Static 3D Image Icon">
-                </div>
-                <h3 class="option-title">Static 3D Image</h3>
-                <p class="option-desc">Get a high-quality 3D rendered image with depth effects that pop, perfect for presentations and digital art.</p>
-            </div>
-            <div class="option-card" data-option="interactive" role="radio" aria-checked="false" tabindex="0">
-                <div class="option-icon">
-                    <img src="{{ url_for('static', filename='images/model.gif') }}" alt="Interactive 3D Model Icon">
-                </div>
-                <h3 class="option-title">Interactive 3D Model</h3>
-                <p class="option-desc">Explore every angle with a fully interactive 3D model you can rotate, zoom, and examine from all perspectives.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Motion Effects Section -->
-    <div class="motion-effects-section" id="motionEffectsSection" role="region" aria-label="Motion Effects Options">
-        <h2>Select Motion Effect</h2>
-        <div class="motion-effects-group" role="radiogroup">
-            <div class="motion-effect-card" data-effect="zoom" role="radio" aria-checked="false" tabindex="0">
-                <div class="motion-effect-icon">
-                    <img src="{{ url_for('static', filename='images/zoom.gif') }}" alt="Zoom Effect Icon">
-                </div>
-                <h3 class="motion-effect-title">Zoom</h3>
-                <p class="motion-effect-desc">Smoothly zoom in</p>
-            </div>
-            <div class="motion-effect-card" data-effect="vertical" role="radio" aria-checked="false" tabindex="0">
-                <div class="motion-effect-icon">
-                    <img src="{{ url_for('static', filename='images/vertical.gif') }}" alt="Vertical Effect Icon">
-                </div>
-                <h3 class="motion-effect-title">Vertical</h3>
-                <p class="motion-effect-desc">Slide up and down</p>
-            </div>
-            <div class="motion-effect-card" data-effect="horizontal" role="radio" aria-checked="false" tabindex="0">
-                <div class="motion-effect-icon">
-                    <img src="{{ url_for('static', filename='images/horizontal.gif') }}" alt="Horizontal Effect Icon">
-                </div>
-                <h3 class="motion-effect-title">Horizontal</h3>
-                <p class="motion-effect-desc">Move side to side</p>
-            </div>
-            <div class="motion-effect-card" data-effect="circle" role="radio" aria-checked="false" tabindex="0">
-                <div class="motion-effect-icon">
-                    <img src="{{ url_for('static', filename='images/circle.gif') }}" alt="Circle Effect Icon">
-                </div>
-                <h3 class="motion-effect-title">Circle</h3>
-                <p class="motion-effect-desc">Rotate in a circular path</p>
-            </div>
-            <div class="motion-effect-card" data-effect="perspective" role="radio" aria-checked="false" tabindex="0">
-                <div class="motion-effect-icon">
-                    <img src="{{ url_for('static', filename='images/perspective.gif') }}" alt="Perspective Effect Icon">
-                </div>
-                <h3 class="motion-effect-title">Perspective</h3>
-                <p class="motion-effect-desc">Tilt with 3D depth</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Convert Button -->
     <div class="convert-btn-container">
         <button class="convert-btn" id="convertBtn" disabled aria-label="Start 3D Conversion">
@@ -1585,48 +1166,7 @@
     <div class="result-container" id="resultContainer" role="region" aria-label="Conversion Results">
         <h2 class="result-title">Your 3D Creation is Ready!</h2>
         <div class="preview-wrapper">
-            <div class="preview-box" id="animationResult" style="display: none;" role="region" aria-label="3D Animation Result">
-                <h3>3D Motion Animation</h3>
-                <div class="motion-video-container">
-                    <video id="motionVideo" controls autoplay loop muted aria-label="3D Animation Video">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="viewer-controls">
-                    <button class="control-btn" id="playPauseBtn" aria-label="Play/Pause Video">
-                        <i class="fas fa-pause"></i> Pause
-                    </button>
-                    <button class="control-btn" id="restartBtn" aria-label="Restart Video">
-                        <i class="fas fa-redo"></i> Restart
-                    </button>
-                </div>
-                <a href="#" class="download-btn" id="downloadAnimationBtn" aria-label="Download Animation">
-                    <i class="fas fa-download"></i> Download Animation
-                </a>
-            </div>
-
-            <div class="preview-box" id="staticResult" style="display: none;" role="region" aria-label="Static 3D Image Result">
-                <h3>Static 3D Image</h3>
-                <div class="static-image-container">
-                    <img id="staticImage" src="" alt="Static 3D Image" loading="lazy">
-                </div>
-                <div class="viewer-controls">
-                    <button class="control-btn" id="zoomInBtn" aria-label="Zoom In">
-                        <i class="fas fa-search-plus"></i> Zoom In
-                    </button>
-                    <button class="control-btn" id="zoomOutBtn" aria-label="Zoom Out">
-                        <i class="fas fa-search-minus"></i> Zoom Out
-                    </button>
-                    <button class="control-btn" id="resetViewBtn" aria-label="Reset View">
-                        <i class="fas fa-sync-alt"></i> Reset
-                    </button>
-                </div>
-                <a href="#" class="download-btn" id="downloadStaticBtn" aria-label="Download 3D Image">
-                    <i class="fas fa-download"></i> Download 3D Image
-                </a>
-            </div>
-
-            <div class="preview-box" id="interactiveResult" style="display: none;" role="region" aria-label="Interactive 3D Model Result">
+            <div class="preview-box" id="interactiveResult">
                 <h3>Interactive 3D Model</h3>
                 <div class="environment-controls-container">
                     <div class="environment-control">
@@ -1718,20 +1258,6 @@
     const cancelBtn = document.getElementById('cancelBtn');
     const retryBtn = document.getElementById('retryBtn');
     const resultContainer = document.getElementById('resultContainer');
-    const motionEffectsSection = document.getElementById('motionEffectsSection');
-
-    const animationResult = document.getElementById('animationResult');
-    const motionVideo = document.getElementById('motionVideo');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const restartBtn = document.getElementById('restartBtn');
-    const downloadAnimationBtn = document.getElementById('downloadAnimationBtn');
-
-    const staticResult = document.getElementById('staticResult');
-    const staticImage = document.getElementById('staticImage');
-    const zoomInBtn = document.getElementById('zoomInBtn');
-    const zoomOutBtn = document.getElementById('zoomOutBtn');
-    const resetViewBtn = document.getElementById('resetViewBtn');
-    const downloadStaticBtn = document.getElementById('downloadStaticBtn');
 
     const interactiveResult = document.getElementById('interactiveResult');
     const modelViewer = document.getElementById('interactiveModel');
@@ -1746,21 +1272,15 @@
     const skyboxSelect = document.getElementById('skyboxSelect');
     const envSelect = document.getElementById('envSelect');
 
-    const optionCards = document.querySelectorAll('.option-card');
-    const motionEffectCards = document.querySelectorAll('.motion-effect-card');
     const progressStages = document.querySelectorAll('.progress-stage');
 
     // State variables
     let selectedFile = null;
-    let selectedOption = null;
-    let selectedMotionEffect = null;
-    let isPlaying = true;
-    let staticZoomLevel = 1;
-    let isRotating = true;
     let conversionController = null;
     let currentProgress = 0;
     let retryCount = 0;
     const maxRetries = 3;
+    let isRotating = true;
 
     // Anime.js Animations
     anime.timeline({
@@ -1790,15 +1310,6 @@
     });
 
     anime({
-      targets: '.option-card',
-      opacity: [0, 1],
-      translateY: [40, 0],
-      duration: 800,
-      easing: 'easeOutCubic',
-      delay: anime.stagger(200, { start: 800 })
-    });
-
-    anime({
       targets: '.convert-btn',
       scale: [1, 1.05, 1],
       duration: 1200,
@@ -1816,34 +1327,9 @@
     uploadBtn.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', handleFileUpload);
 
-    optionCards.forEach(card => {
-      card.addEventListener('click', selectOption);
-      card.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          selectOption.call(card);
-        }
-      });
-    });
-
-    motionEffectCards.forEach(card => {
-      card.addEventListener('click', selectMotionEffect);
-      card.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          selectMotionEffect.call(card);
-        }
-      });
-    });
-
     convertBtn.addEventListener('click', startConversion);
     cancelBtn.addEventListener('click', cancelConversion);
     retryBtn.addEventListener('click', retryConversion);
-
-    playPauseBtn.addEventListener('click', togglePlayPause);
-    restartBtn.addEventListener('click', restartVideo);
-
-    zoomInBtn.addEventListener('click', () => zoomStaticImage(1.2));
-    zoomOutBtn.addEventListener('click', () => zoomStaticImage(0.8));
-    resetViewBtn.addEventListener('click', resetStaticImage);
 
     // 3D Model Controls
     rotateToggleBtn.addEventListener('click', toggleRotation);
@@ -1938,55 +1424,8 @@
       reader.readAsDataURL(file);
     }
 
-    function selectOption() {
-      optionCards.forEach(card => {
-        card.classList.remove('selected');
-        card.setAttribute('aria-checked', 'false');
-      });
-      this.classList.add('selected');
-      this.setAttribute('aria-checked', 'true');
-      selectedOption = this.getAttribute('data-option');
-
-      if (selectedOption === 'animation') {
-        motionEffectsSection.classList.add('active');
-        selectedMotionEffect = null;
-        motionEffectCards.forEach(card => {
-          card.classList.remove('selected');
-          card.setAttribute('aria-checked', 'false');
-        });
-        anime({
-          targets: '.motion-effect-card',
-          opacity: [0, 1],
-          scale: [0.9, 1],
-          duration: 600,
-          easing: 'easeOutCubic',
-          delay: anime.stagger(100)
-        });
-      } else {
-        motionEffectsSection.classList.remove('active');
-        selectedMotionEffect = null;
-      }
-      updateConvertButton();
-    }
-
-    function selectMotionEffect() {
-      if (selectedOption !== 'animation') return;
-      motionEffectCards.forEach(card => {
-        card.classList.remove('selected');
-        card.setAttribute('aria-checked', 'false');
-      });
-      this.classList.add('selected');
-      this.setAttribute('aria-checked', 'true');
-      selectedMotionEffect = this.getAttribute('data-effect');
-      updateConvertButton();
-    }
-
     function updateConvertButton() {
-      if (selectedOption === 'animation') {
-        convertBtn.disabled = !(selectedFile && selectedOption && selectedMotionEffect);
-      } else {
-        convertBtn.disabled = !(selectedFile && selectedOption);
-      }
+      convertBtn.disabled = !selectedFile;
     }
 
     function addStatusMessage(message, isError = false) {
@@ -2033,11 +1472,7 @@
     }
 
     async function startConversion() {
-      if (!selectedFile || !selectedOption) return;
-      if (selectedOption === 'animation' && !selectedMotionEffect) {
-        alert('Please select a motion effect for your 3D animation');
-        return;
-      }
+      if (!selectedFile) return;
 
       convertBtn.disabled = true;
       convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
@@ -2063,10 +1498,6 @@
       ];
 
       const formData = new FormData();
-      formData.append('option', selectedOption);
-      if (selectedMotionEffect) {
-        formData.append('motion_effect', selectedMotionEffect);
-      }
       if (selectedFile.url) {
         formData.append('image_url', selectedFile.url);
       } else {
@@ -2154,56 +1585,8 @@
     }
 
     function showConversionResult(result) {
-      animationResult.style.display = 'none';
-      staticResult.style.display = 'none';
-      interactiveResult.style.display = 'none';
-
-      switch (selectedOption) {
-        case 'animation':
-          showAnimationResult(result.video_url);
-          break;
-        case 'static':
-          showStaticResult(result.image_url);
-          break;
-        case 'interactive':
-          showInteractiveResult(result.model_url);
-          break;
-      }
-      resultContainer.style.display = 'block';
-      anime({
-        targets: '.preview-box',
-        opacity: [0, 1],
-        translateY: [40, 0],
-        duration: 800,
-        easing: 'easeOutCubic',
-        delay: anime.stagger(200)
-      });
-      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function showAnimationResult(videoUrl) {
-      animationResult.style.display = 'block';
-      motionVideo.src = videoUrl || "{{ url_for('static', filename='videos/sample_3d_animation.mp4') }}";
-      motionVideo.load();
-      downloadAnimationBtn.href = motionVideo.src;
-      downloadAnimationBtn.download = `3d_animation_${selectedMotionEffect}.mp4`;
-      isPlaying = true;
-      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
-      motionVideo.play();
-    }
-
-    function showStaticResult(imageUrl) {
-      staticResult.style.display = 'block';
-      staticImage.src = imageUrl || "{{ url_for('static', filename='images/sample_3d_image.jpg') }}";
-      downloadStaticBtn.href = staticImage.src;
-      downloadStaticBtn.download = '3d_image.jpg';
-      staticZoomLevel = 1;
-      staticImage.style.transform = 'scale(1)';
-    }
-
-    function showInteractiveResult(modelUrl) {
       interactiveResult.style.display = 'block';
-      modelViewer.src = modelUrl || "{{ url_for('static', filename='models/sample_3d_model.glb') }}";
+      modelViewer.src = result.model_url || "{{ url_for('static', filename='models/sample_3d_model.glb') }}";
       downloadModelBtn.href = modelViewer.src;
       downloadModelBtn.download = '3d_model.glb';
       modelError.style.display = 'none';
@@ -2212,47 +1595,16 @@
       isRotating = true;
       rotateToggleBtn.innerHTML = '<i class="fas fa-sync-alt"></i>';
       modelViewer.setAttribute('auto-rotate', '');
-    }
 
-    function togglePlayPause() {
-      if (isPlaying) {
-        motionVideo.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i> Play';
-      } else {
-        motionVideo.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
-      }
-      isPlaying = !isPlaying;
-    }
-
-    function restartVideo() {
-      motionVideo.currentTime = 0;
-      motionVideo.play();
-      isPlaying = true;
-      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
-    }
-
-    function zoomStaticImage(factor) {
-      staticZoomLevel *= factor;
-      staticZoomLevel = Math.min(Math.max(staticZoomLevel, 0.5), 3);
-      staticImage.style.transform = `scale(${staticZoomLevel})`;
+      resultContainer.style.display = 'block';
       anime({
-        targets: staticImage,
-        scale: staticZoomLevel,
-        duration: 300,
-        easing: 'easeOutQuad'
+        targets: '.preview-box',
+        opacity: [0, 1],
+        translateY: [40, 0],
+        duration: 800,
+        easing: 'easeOutCubic'
       });
-    }
-
-    function resetStaticImage() {
-      staticZoomLevel = 1;
-      staticImage.style.transform = 'scale(1)';
-      anime({
-        targets: staticImage,
-        scale: 1,
-        duration: 300,
-        easing: 'easeOutQuad'
-      });
+      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function toggleRotation() {
