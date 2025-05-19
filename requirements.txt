@@ -18,4 +18,4 @@ click
 colorama
 blinker
 fal-client
-python-magic-bin
+python-magic
