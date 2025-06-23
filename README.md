@@ -101,7 +101,7 @@ python app.py
 👨‍💻 **Uttam Tripathi**  
 👩‍💻 **Parul Sharma**
 
-Final-year BCA students specializing in Data Science & AI.
+BCA Graduates specializing in Data Science & AI.
 
 ---
 
