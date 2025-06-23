@@ -99,7 +99,7 @@ python app.py
 ## 🙌 Team
 
 👨‍💻 [Uttam Tripathi](https://github.com/uttamtripathi54)  
-👩‍💻 [Parul Sharma](https://github.com/Parull44)
+👩‍💻 [Parul Sharma](https://github.com/Parul144)
 
 BCA Graduates specializing in Data Science & AI.
 
