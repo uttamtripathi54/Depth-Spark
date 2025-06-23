@@ -98,8 +98,8 @@ python app.py
 
 ## 🙌 Team
 
-👨‍💻 **Uttam Tripathi**  
-👩‍💻 **Parul Sharma**
+👨‍💻 [Uttam Tripathi](https://github.com/uttamtripathi54)  
+👩‍💻 [Parul Sharma](https://github.com/Parull44)
 
 BCA Graduates specializing in Data Science & AI.
 
