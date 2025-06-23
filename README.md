@@ -77,6 +77,7 @@ depth-spark/
 ├── instance/                 # User Data, Contact Form Data
 ├── app.py                   # Main Flask app
 ├── model.py                  # Backend code, API Calling
+├── .env                  # API Key
 └── requirements.txt         # Python dependencies
 ```
 
