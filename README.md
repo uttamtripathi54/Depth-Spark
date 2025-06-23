@@ -74,10 +74,10 @@ depth-spark/
 │
 ├── static/                  # CSS, JS, icons, Exported 3D models
 ├── templates/               # HTML templates
-├── instance/                 # User Data, Contact Form Data
+├── instance/                # User Data, Contact Form Data
 ├── app.py                   # Main Flask app
-├── model.py                  # Backend code, API Calling
-├── .env                  # API Key
+├── model.py                 # Backend code, API Calling
+├── .env                     # API Key
 └── requirements.txt         # Python dependencies
 ```
 
