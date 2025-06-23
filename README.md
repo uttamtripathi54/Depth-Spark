@@ -58,11 +58,11 @@
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML, CSS, JavaScript, Bootstrap
+- **Frontend**: HTML, CSS, JavaScript, Anime Js
 - **Backend**: Python, Flask
 - **AI Integration**: Falcon AI API
-- **3D Rendering**: Three.js / GLTF Viewer
-- **Database**: SQLite
+- **3D Rendering**: Google's Model Viewer / GLTF Viewer
+- **Database**: SQLAlchemy
 - **Authentication**: Flask-Login
 
 ---
@@ -72,14 +72,11 @@
 ```
 depth-spark/
 │
-├── static/                  # CSS, JS, icons
+├── static/                  # CSS, JS, icons, Exported 3D models
 ├── templates/               # HTML templates
-├── uploads/                 # User-uploaded images
-├── models/                  # Exported 3D models
+├── instance/                 # User Data, Contact Form Data
 ├── app.py                   # Main Flask app
-├── auth.py                  # Login & Registration
-├── ai_converter.py          # AI model integration
-├── viewer.py                # GLTF 3D Viewer
+├── model.py                  # Backend code, API Calling
 └── requirements.txt         # Python dependencies
 ```
 
@@ -88,7 +85,7 @@ depth-spark/
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/your-username/depth-spark.git
+git clone https://github.com/uttamtripathi54/Depth-Spark.git
 cd depth-spark
 pip install -r requirements.txt
 python app.py
@@ -115,7 +112,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 💬 Feedback
 
-Have suggestions or ideas? Feel free to open an [Issue](https://github.com/your-username/depth-spark/issues) or reach out on [LinkedIn](https://www.linkedin.com/in/uttam-tripathi)!
+Have suggestions or ideas? Feel free to open an [Issue](https://github.com/uttamtripathi54/depth-spark/issues) or reach out on [LinkedIn](https://www.linkedin.com/in/uttam-tripathi-8421b2290)!
 
 ---
 
