@@ -1,11 +1,11 @@
 # 🌊 Depth Spark - 2D to 3D Image Converter 🔁
 
-![GitHub last commit](https://img.shields.io/github/last-commit/your-username/depth-spark?color=cyan)
-![GitHub repo size](https://img.shields.io/github/repo-size/your-username/depth-spark?color=teal)
+![GitHub last commit](https://img.shields.io/github/last-commit/uttamtripathi54/depth-spark?color=cyan)
+![GitHub repo size](https://img.shields.io/github/repo-size/uttamtripathi54/depth-spark?color=teal)
 ![Python](https://img.shields.io/badge/Built%20With-Python-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-> **Depth Spark** is a free, web-based tool that converts 2D images into **interactive 3D models** using AI. Designed with accessibility and simplicity in mind, this tool empowers creators, educators, and businesses to embrace 3D technology—without the steep learning curve.
+> **Depth Spark** is a free, web-based app that converts 2D images into **interactive 3D models** using AI. Designed with accessibility and simplicity in mind, this tool empowers creators, educators, and businesses to embrace 3D technology—without the steep learning curve.
 
 ---
 
